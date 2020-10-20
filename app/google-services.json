@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "41054128101",
+    "firebase_url": "https://servicebotproject.firebaseio.com",
+    "project_id": "servicebotproject",
+    "storage_bucket": "servicebotproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41054128101:android:456951d6fd888aa849510c",
+        "android_client_info": {
+          "package_name": "com.example.android.customerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41054128101-hslg5rgf4m5b5vqucpglojcfiqr3jp59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfLKdYJWD0xpVEjXDuuCb-9g1wK01RCyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41054128101-hslg5rgf4m5b5vqucpglojcfiqr3jp59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
