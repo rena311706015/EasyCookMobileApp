@@ -10,30 +10,23 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder> {
     private Context context;
     public ServiceViewHolder holder;
-    private ArrayList<String> botchatlist;
-    TextView chatText;
-    public ServiceAdapter(Context context) {
+    public TextView chatText;
+    public ArrayList<String> chatlist;
+    public ServiceAdapter(Context context,ArrayList<String> list) {
         this.context = context;
-
+        this.chatlist=list;
+        Log.e("0=",chatlist.get(0));
     }
 
     @Override
     public ServiceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.chat_list, parent, false);
-        botchatlist= new ArrayList<>();
-        botchatlist.add("歡迎初次來到廚yee娘的世界，我將為你介紹一些便利的功能。");
-        botchatlist.add("我們提供的食譜導覽服務，可以讓你輕鬆透過「對話」的方式知道做菜步驟，所以想邀請你開啟麥克風的權限喔！");
-        for(String s: botchatlist){
-            Log.e("content:",s);
-        }
+        View view = inflater.inflate(R.layout.message, parent, false);
 
         return new ServiceViewHolder(view);
     }
@@ -49,13 +42,10 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     public void onBindViewHolder(final ServiceViewHolder holder, final int position) {
 
         this.holder=holder;
-        Log.d("position",Integer.toString(position));
-        Log.d("number",botchatlist.get(position));
-
-        chatText.setText(botchatlist.get(position));
+        chatText.setText(chatlist.get(position));
     }
     @Override
     public int getItemCount() {
-        return 10;
+        return chatlist.size();
     }
 }

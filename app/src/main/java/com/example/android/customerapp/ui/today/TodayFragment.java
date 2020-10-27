@@ -27,10 +27,6 @@ public class TodayFragment extends Fragment {
         todayViewModel =
                 ViewModelProviders.of(this).get(TodayViewModel.class);
         View root = inflater.inflate(R.layout.fragment_today, container, false);
-//        NavHostFragment.findNavController(this);
-        NavHostFragment
-                .findNavController(this)
-                .navigate(R.id.action_navigation_today_to_navigation_home);
         return root;
     }
 }
