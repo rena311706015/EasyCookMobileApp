@@ -1,5 +1,7 @@
 package com.example.android.customerapp;
 
+
+
 public class BotMessage {
     public int id;
     public String message;
