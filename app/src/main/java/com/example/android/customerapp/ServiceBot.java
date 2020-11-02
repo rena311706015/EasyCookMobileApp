@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -11,8 +12,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,16 +35,15 @@ public class ServiceBot extends AppCompatActivity {
     private FirebaseDatabase db;
     private DatabaseReference dbRef;
     private DatabaseReference dbRef2;
-
-    public HashMap<Integer,String> hashMap;
-    public int count=0,index=1;
+    private HashMap<Integer,String> hashMap;
+    private int count=0,index=1;
     private String targetRecipe="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);//隱藏標題列
         setContentView(R.layout.activity_bot);
-        getSupportActionBar().hide(); //隱藏標題
+        getSupportActionBar().hide(); //隱藏標題列
         botChatList=new ArrayList<>();
         hashMap=new HashMap<>();
         db = FirebaseDatabase.getInstance();
@@ -107,32 +105,26 @@ public class ServiceBot extends AppCompatActivity {
 
     }
     public void confirm(View v) throws InterruptedException {
-
-        if(count==2){
-            confirmButton.setVisibility(View.GONE);
-            cancelButton.setVisibility(View.GONE);
-            corfirmRecipeButton.setVisibility(View.VISIBLE);
-            spinner.setVisibility(View.VISIBLE);
-            hashMap.put(count+1,"確定");
-        }else{
-            confirmButton.setClickable(false);
-            cancelButton.setClickable(false);
-            confirmButton.setVisibility(View.VISIBLE);
-            cancelButton.setVisibility(View.VISIBLE);
-            confirmButton.setClickable(true);
-            cancelButton.setClickable(true);
-            corfirmRecipeButton.setVisibility(View.GONE);
-            spinner.setVisibility(View.GONE);
-            if(count==4){
-                hashMap.put(count+1,targetRecipe);
-            }else{
-                hashMap.put(count+1,"確定");
-            }
-        }
-        hashMap.put(count+2,botChatList.get(index)+targetRecipe);
-        adapter.notifyItemInserted(hashMap.size() - 1);
+        Handler handler = new Handler();
         count+=2;
-        index+=1;
+        if(count==6){
+            hashMap.put(count-1,targetRecipe);
+            setVisibility();       //隱藏下拉式選單
+        }else{
+            hashMap.put(count-1,"確定");
+        }
+        adapter.notifyItemInserted(hashMap.size() - 1);  //先顯示使用者的回答
+
+        handler.postDelayed(new Runnable() {  //延遲訊息出現(像是機器人在想回答，而不是跟著使用者的訊息一起出來)
+            public void run() {
+                hashMap.put(count,botChatList.get(index)+targetRecipe);
+                adapter.notifyItemInserted(hashMap.size() - 1);   //延遲1秒後顯示機器人的回答
+                recyclerView.scrollToPosition(adapter.getItemCount()-1);  //滑到最後一個項目
+
+                index+=1;
+                if(count==4)setVisibility();  //顯示下拉式選單
+            }
+        }, 1000);
     }
     public void cancel(View v){
         AlertDialog.Builder a = new AlertDialog.Builder(ServiceBot.this);
@@ -147,11 +139,21 @@ public class ServiceBot extends AppCompatActivity {
             }
         });
         a.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int num) {
-
-            }
+            public void onClick(DialogInterface dialog, int num) {}
         });
         a.show();
-
+    }
+    public void setVisibility(){        //如果是Visible就轉為Gone，是Gone就轉為Visible
+        if(confirmButton.getVisibility()!=View.GONE){
+            confirmButton.setVisibility(View.GONE);
+            cancelButton.setVisibility(View.GONE);
+            corfirmRecipeButton.setVisibility(View.VISIBLE);
+            spinner.setVisibility(View.VISIBLE);
+        }else{
+            confirmButton.setVisibility(View.VISIBLE);
+            cancelButton.setVisibility(View.VISIBLE);
+            corfirmRecipeButton.setVisibility(View.GONE);
+            spinner.setVisibility(View.GONE);
+        }
     }
 }

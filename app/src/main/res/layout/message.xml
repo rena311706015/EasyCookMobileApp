@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="120dp"
     android:orientation="horizontal"
+    android:background="#FFDBCD"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -10,21 +11,41 @@
         android:id="@+id/chat_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/chatbot"
-        android:layout_weight="1"/>
+        android:src="@drawable/chatbot_round"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
         android:id="@+id/chat_text"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:paddingLeft="5dp"
-        android:gravity="center|left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        android:gravity="center"
         android:textSize="20sp"
-        android:layout_weight="200"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/rectangle"
+        app:layout_constraintEnd_toEndOf="@id/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageView
+        android:id="@+id/rectangle"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:src="@drawable/rectangle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/chat_image"
+        app:layout_constraintEnd_toStartOf="@id/chat_image2"
+        app:layout_constraintBottom_toBottomOf="parent"/>
     <ImageView
         android:id="@+id/chat_image2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/chatuser"
-        android:layout_weight="1"
-        android:visibility="gone"/>
-</LinearLayout>
+        android:src="@drawable/chatuser_round"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
