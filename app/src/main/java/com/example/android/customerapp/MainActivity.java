@@ -1,6 +1,7 @@
 package com.example.android.customerapp;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);                    //隱藏標題列
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
 
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide(); //隱藏標題

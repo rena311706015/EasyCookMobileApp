@@ -23,5 +23,16 @@
         android:id="@+id/navigation_account"
         android:name="com.example.android.customerapp.ui.account.AccountFragment"
         android:label="@string/title_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_navigation_account_to_navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.example.android.customerapp.ui.account.LoginFragment"
+        android:label="登入"
+        tools:layout="@layout/fragment_account_login" >
+    </fragment>
 </navigation>
