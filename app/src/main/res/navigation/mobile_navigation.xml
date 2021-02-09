@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_navigation_account_to_navigation_login"
             app:destination="@id/navigation_login" />
+        <action
+            android:id="@+id/action_navigation_account_to_navigation_register"
+            app:destination="@id/navigation_register" />
     </fragment>
 
     <fragment
@@ -35,4 +38,10 @@
         android:label="登入"
         tools:layout="@layout/fragment_account_login" >
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.example.android.customerapp.ui.account.RegisterFragment"
+        android:label="註冊"
+        tools:layout="@layout/fragment_account_register" />
 </navigation>

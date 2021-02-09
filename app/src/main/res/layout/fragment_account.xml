@@ -8,34 +8,11 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/background"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guideline1"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-    <ImageView
-        android:id="@+id/userImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/chatuser_round"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guideline1"
-        app:layout_constraintStart_toStartOf="@id/guideline4"
-        app:layout_constraintEnd_toEndOf="@id/guideline5"/>
-    <TextView
-        android:id="@+id/userId"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="請先登入"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="@drawable/rectangle"
-        android:scaleType="centerInside"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guideline2"
-        app:layout_constraintBottom_toBottomOf="@id/guideline3"
-        app:layout_constraintStart_toStartOf="@id/guideline8"
-        app:layout_constraintEnd_toEndOf="@id/guideline9"/>
     <Button
         android:id="@+id/goLogin"
         android:layout_width="0dp"
@@ -43,8 +20,8 @@
         android:text="會員登入"
         android:textSize="20sp"
         android:background="@color/white"
-        app:layout_constraintTop_toTopOf="@id/guideline1"
-        app:layout_constraintBottom_toBottomOf="@id/guideline6"
+        app:layout_constraintTop_toTopOf="@id/guidelineH25"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
     <Button
@@ -54,65 +31,28 @@
         android:text="會員註冊"
         android:textSize="20sp"
         android:background="@color/white"
-        android:onClick="register"
-        app:layout_constraintTop_toTopOf="@id/guideline6"
-        app:layout_constraintBottom_toBottomOf="@id/guideline7"
+        app:layout_constraintTop_toTopOf="@id/guidelineH35"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
+        android:id="@+id/guidelineH25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25"/>
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
+        android:id="@+id/guidelineH35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.35"/>
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
+        android:id="@+id/guidelineH45"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.45"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.45"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

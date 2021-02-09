@@ -43,6 +43,7 @@ public class ServiceBot extends AppCompatActivity {
     private ArrayList<String> botChatList;
     private HashMap<String,String> recipeHashMap;
     private ArrayList<String> recipeList;
+    private HashMap<String,ArrayList<Integer>> timeListHashMap;
     private FirebaseDatabase db;
     private DatabaseReference dbRef;
     private DatabaseReference dbRef2;
@@ -60,6 +61,7 @@ public class ServiceBot extends AppCompatActivity {
         msgHashMap=new HashMap<>();
         recipeList=new ArrayList<>();
         recipeHashMap=new HashMap<>();
+        timeListHashMap=new HashMap<>();
         db = FirebaseDatabase.getInstance();
         dbRef = db.getReference("messages");
         recyclerView = findViewById(R.id.recyclerview);
@@ -91,12 +93,17 @@ public class ServiceBot extends AppCompatActivity {
         dbRef2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                int x=0;
+
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    ArrayList<Integer> timeList= new ArrayList<>();
                     recipeList.add(ds.child("recipeName").getValue().toString());
                     recipeHashMap.put(ds.child("recipeName").getValue().toString(),ds.child("recipeVideo").getValue().toString());
-                    x+=1;
+                    for(DataSnapshot part : ds.child("recipeParts").getChildren()){
+                        timeList.add(Integer.valueOf(part.getValue().toString()));
+                    }
+                    timeListHashMap.put(ds.child("recipeName").getValue().toString(),timeList);
                 }
+
                 ArrayAdapter<String> recipeListAdapter = new ArrayAdapter<>(ServiceBot.this,
                         android.R.layout.simple_spinner_dropdown_item,
                         recipeList);
@@ -122,7 +129,7 @@ public class ServiceBot extends AppCompatActivity {
     public void confirm(View v) throws InterruptedException {
         Handler handler = new Handler();
         count+=2;
-
+        confirmButton.setEnabled(false);
         if(count==6) {
             msgHashMap.put(count - 1, targetRecipe);
             setVisibility();
@@ -136,7 +143,7 @@ public class ServiceBot extends AppCompatActivity {
             public void run() {
 
                 msgHashMap.put(count,botChatList.get(index)+targetRecipe);
-                adapter.notifyItemInserted(msgHashMap.size() - 1);   //延遲1秒後顯示機器人的回答
+                adapter.notifyItemInserted(msgHashMap.size() - 1);
                 recyclerView.scrollToPosition(adapter.getItemCount()-1);
 
                 index+=1;
@@ -159,13 +166,17 @@ public class ServiceBot extends AppCompatActivity {
                             intent.setClass(ServiceBot.this , VideoPlayerActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("url",targetRecipeVideo);
+                            bundle.putIntegerArrayList("time",timeListHashMap.get(targetRecipe));
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }
                     },3000);
                 }
+                confirmButton.setEnabled(true);
+
             }
         }, 1000);
+
     }
     public void cancel(View v){
         AlertDialog.Builder a = new AlertDialog.Builder(ServiceBot.this);

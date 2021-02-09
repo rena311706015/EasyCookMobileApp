@@ -23,7 +23,7 @@ import com.example.android.customerapp.R;
 public class AccountFragment extends Fragment {
 
     private AccountViewModel accountViewModel;
-    private Button goLoginButton;
+    private Button goLoginButton,goRegisterButton;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -36,6 +36,13 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_navigation_account_to_navigation_login);
+            }
+        });
+        goRegisterButton=root.findViewById(R.id.goRegister);
+        goRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_navigation_account_to_navigation_register);
             }
         });
         return root;

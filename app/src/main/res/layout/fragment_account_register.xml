@@ -19,7 +19,7 @@
         android:id="@+id/userId"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="登入 Login"
+        android:text="註冊 Register"
         android:textSize="30sp"
         android:textColor="@color/white"
         android:gravity="center"
@@ -38,9 +38,9 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH25"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH35"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/loginAccount"/>
+        app:layout_constraintEnd_toStartOf="@id/registerAccount"/>
     <EditText
-        android:id="@+id/loginAccount"
+        android:id="@+id/registerAccount"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textSize="20sp"
@@ -60,9 +60,9 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH35"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/loginPassword"/>
+        app:layout_constraintEnd_toStartOf="@id/registerPassword"/>
     <EditText
-        android:id="@+id/loginPassword"
+        android:id="@+id/registerPassword"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:textSize="20sp"
@@ -72,18 +72,83 @@
         app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
         app:layout_constraintEnd_toEndOf="parent"/>
-    <Button
-        android:id="@+id/login"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="登入"
+    <TextView
+        android:id="@+id/phoneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="手機"
         android:textSize="20sp"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="@id/guidelineH45"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/registerPhone"/>
+    <EditText
+        android:id="@+id/registerPhone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/guidelineH45"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH55"
+        app:layout_constraintStart_toEndOf="@id/guidelineV2"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/emailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="信箱"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/guidelineH55"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH65"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/registerEmail"/>
+    <EditText
+        android:id="@+id/registerEmail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/guidelineH55"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH65"
+        app:layout_constraintStart_toEndOf="@id/guidelineV2"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="名稱"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/guidelineH65"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/registerName"/>
+    <EditText
+        android:id="@+id/registerName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/guidelineH65"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH75"
+        app:layout_constraintStart_toEndOf="@id/guidelineV2"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+        android:id="@+id/register"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="註冊"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/guidelineH75"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH85"
         app:layout_constraintStart_toStartOf="@id/guidelineV2"
         app:layout_constraintEnd_toEndOf="@id/guidelineV8"/>
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV2"
         android:layout_width="wrap_content"
@@ -120,4 +185,22 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.55"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH65"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH85"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
