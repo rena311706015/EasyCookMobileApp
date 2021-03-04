@@ -31,6 +31,7 @@ public class Post extends AsyncTask<String,String,String> {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String responsebody=response.body().string();
+            Log.e("body",responsebody);
             return responsebody;
         } catch (IOException e) {
             e.printStackTrace();

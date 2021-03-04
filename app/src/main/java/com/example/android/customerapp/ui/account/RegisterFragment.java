@@ -55,8 +55,8 @@ public class RegisterFragment extends Fragment {
 
     }
     public String BuildJson(String account,String password, String phone, String email, String name){
-        return "{"+"\"account\""+":"+"\""+account+"\""+","
-                + "\"password\""+":"+"\""+password+"\""+","
+        return "{"+"\"account\":\""+account+"\","
+                + "\"password\":\""+password+"\""+","
                 + "\"phone\""+":"+"\""+phone+"\""+","
                 + "\"email\""+":"+"\""+email+"\""+","
                 + "\"username\""+":"+"\""+name+"\""

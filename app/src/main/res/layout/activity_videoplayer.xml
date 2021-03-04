@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <VideoView
+    <com.example.android.customerapp.RecipeVideoView
         android:id="@+id/videoview"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -12,5 +12,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageView
+        android:id="@+id/speak_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/mic"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/guidelineH1"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH3"
+        app:layout_constraintStart_toStartOf="@id/guidelineV7"
+        app:layout_constraintEnd_toEndOf="@id/guidelineV9"/>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.7"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
