@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:queryBackground="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH15"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
     <ImageView
         android:id="@+id/image_home"
         android:layout_width="0dp"

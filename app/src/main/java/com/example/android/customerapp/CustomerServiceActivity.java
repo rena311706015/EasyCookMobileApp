@@ -7,19 +7,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.android.customerapp.adapters.ServiceAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ServiceBot extends AppCompatActivity {
+public class CustomerServiceActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Button confirmButton;
     private Button cancelButton;
@@ -66,7 +63,7 @@ public class ServiceBot extends AppCompatActivity {
         dbRef = db.getReference("messages");
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ServiceBot.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(CustomerServiceActivity.this));
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -76,7 +73,7 @@ public class ServiceBot extends AppCompatActivity {
                     botChatList.add(ds.child("message").getValue().toString());
                 }
                 msgHashMap.put(0,botChatList.get(0));
-                adapter = new ServiceAdapter(ServiceBot.this,msgHashMap);
+                adapter = new ServiceAdapter(CustomerServiceActivity.this,msgHashMap);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -104,7 +101,7 @@ public class ServiceBot extends AppCompatActivity {
                     timeListHashMap.put(ds.child("recipeName").getValue().toString(),timeList);
                 }
 
-                ArrayAdapter<String> recipeListAdapter = new ArrayAdapter<>(ServiceBot.this,
+                ArrayAdapter<String> recipeListAdapter = new ArrayAdapter<>(CustomerServiceActivity.this,
                         android.R.layout.simple_spinner_dropdown_item,
                         recipeList);
                 spinner.setAdapter(recipeListAdapter);
@@ -148,13 +145,13 @@ public class ServiceBot extends AppCompatActivity {
 
                 index+=1;
                 if(count==2){
-                    int permissionCheck = ContextCompat.checkSelfPermission(ServiceBot.this, Manifest.permission.RECORD_AUDIO);
+                    int permissionCheck = ContextCompat.checkSelfPermission(CustomerServiceActivity.this, Manifest.permission.RECORD_AUDIO);
                     if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(ServiceBot.this,
+                        ActivityCompat.requestPermissions(CustomerServiceActivity.this,
                                 new String[]{Manifest.permission.RECORD_AUDIO},
                                 1);
                     }else{
-                        Toast.makeText(ServiceBot.this, "已授權麥克風權限", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CustomerServiceActivity.this, "已授權麥克風權限", Toast.LENGTH_SHORT).show();
                     }
                 }
                 if(count==4)setVisibility();  //顯示下拉式選單
@@ -163,7 +160,7 @@ public class ServiceBot extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             Intent intent = new Intent();
-                            intent.setClass(ServiceBot.this , VideoPlayerActivity.class);
+                            intent.setClass(CustomerServiceActivity.this , VideoPlayerActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("url",targetRecipeVideo);
                             bundle.putIntegerArrayList("time",timeListHashMap.get(targetRecipe));
@@ -179,13 +176,13 @@ public class ServiceBot extends AppCompatActivity {
 
     }
     public void cancel(View v){
-        AlertDialog.Builder a = new AlertDialog.Builder(ServiceBot.this);
+        AlertDialog.Builder a = new AlertDialog.Builder(CustomerServiceActivity.this);
         a.setTitle("提醒");
         a.setMessage("確定要退出嗎?");
 
         a.setPositiveButton("確定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int num) {
-                Intent intent = new Intent(ServiceBot.this, MainActivity.class);
+                Intent intent = new Intent(CustomerServiceActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

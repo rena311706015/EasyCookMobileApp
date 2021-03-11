@@ -1,16 +1,16 @@
-package com.example.android.customerapp.ui.today;
+package com.example.android.customerapp.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class TodayViewModel extends ViewModel {
+public class AccountViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public TodayViewModel() {
+    public AccountViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is today fragment");
+        mText.setValue("This is account fragment");
     }
 
     public LiveData<String> getText() {

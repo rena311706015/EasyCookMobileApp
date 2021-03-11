@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">廚藝娘</string>
     <string name="title_home">主頁</string>
-    <string name="title_today">最新</string>
+    <string name="title_recipe">食譜</string>
     <string name="title_account">會員</string>
     <string name="text_function1">廚藝娘</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.android.customerapp;
+package com.example.android.customerapp.models;
 
 import android.content.Context;
 import android.util.AttributeSet;

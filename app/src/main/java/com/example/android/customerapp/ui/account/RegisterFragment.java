@@ -12,9 +12,10 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import com.example.android.customerapp.Post;
+import com.example.android.customerapp.POST;
 import com.example.android.customerapp.R;
-import com.example.android.customerapp.ResponseData;
+import com.example.android.customerapp.models.Member;
+import com.example.android.customerapp.viewmodels.AccountViewModel;
 
 public class RegisterFragment extends Fragment {
 
@@ -37,11 +38,11 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 final String json = BuildJson(account.getText().toString(),password.getText().toString(),phone.getText().toString(),email.getText().toString(),name.getText().toString());
-                Post post = new Post();
+                POST post = new POST();
                 post.execute("http://140.118.9.145:8082/member/register",json);
-                post.setOnAsyncResponse(new Post.AsyncResponse() {
+                post.setOnAsyncResponse(new POST.AsyncResponse() {
                     @Override
-                    public void onDataReceivedSuccess(ResponseData data) {
+                    public void onDataReceivedSuccess(Member data) {
                         Log.e("註冊成功","id:"+data.id);
                     }
                     @Override

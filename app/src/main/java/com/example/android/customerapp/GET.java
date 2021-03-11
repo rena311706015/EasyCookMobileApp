@@ -3,32 +3,25 @@ package com.example.android.customerapp;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.gson.Gson;
+import com.example.android.customerapp.models.Recipe;
+import com.example.android.customerapp.models.RecipeIngredient;
+import com.example.android.customerapp.models.RecipeStep;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class GET extends AsyncTask<String,String,String> {
     public AsyncResponse asyncResponse;
+    OkHttpClient client = new OkHttpClient();
 
     @Override
     protected void onPreExecute() {
@@ -37,43 +30,20 @@ public class GET extends AsyncTask<String,String,String> {
 
     @Override
     protected String doInBackground(String... params) {
-        try {
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            URL url = new URL(params[0]);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            Document doc = documentBuilder.parse(connection.getInputStream());
-            Element el = doc.getDocumentElement();
-            NodeList list = el.getElementsByTagName("media:content");///media:content
-            String cursor = "";
-            for (int i = 0; i < list.getLength(); i++)
-            {
-                Node node = list.item(i);
-                if (node != null)
-                {
-                    NamedNodeMap nodeMap = node.getAttributes();
-                    HashMap<String, String> maps = new HashMap<String, String>();
-                    for (int j = 0; j < nodeMap.getLength(); j++)
-                    {
-                        Attr att = (Attr) nodeMap.item(j);
-                        maps.put(att.getName(), att.getValue());
-                    }
-                    if (maps.containsKey("yt:format"))
-                    {
-                        String f = maps.get("yt:format");
-                        if (maps.containsKey("url"))
-                        {
-                            cursor = maps.get("url");
-                        }
-                        if (f.equals("1"))
-                            return cursor;
-                    }
-                }
-            }
-            return cursor;
-        }catch (Exception ex){
-            Log.e("Get Url Video RTSP Exception======>>", ex.toString());
+        Request request = new Request.Builder()
+                .url(params[0])
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            String result=response.body().string();
+            String result1 = result.replaceAll("\\\\", "");
+            String result2 = result1.replaceAll(Matcher.quoteReplacement("$"), "");
+            Log.e("RESPONSE",result2);
+//            String responsebody = result2.substring(1, result2.length()-1);
+            return result2;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return e.toString();
         }
-        return "fail";
     }
 
     public void setOnAsyncResponse(AsyncResponse asyncResponse)
@@ -85,16 +55,52 @@ public class GET extends AsyncTask<String,String,String> {
     protected void onPostExecute(String result) {
         if (result != null)
         {
-            String text=result;
-            asyncResponse.onDataReceivedSuccess(text);
-        }
-        else {
+            ArrayList<Recipe> recipes = new ArrayList<>();
+            ArrayList<RecipeStep> steps = new ArrayList<>();
+            ArrayList<RecipeIngredient> ingredients = new ArrayList<>();
+            try {
+                if (result != null) {
+                    JSONArray recipeArray = new JSONArray(result);
+                    for (int i = 0; i < recipeArray.length(); i++) {
+                        JSONObject recipe = recipeArray.getJSONObject(i);
+                        int id = recipe.getInt("id");
+                        String name = recipe.getString("name");
+                        String link = recipe.getString("link");
+                        int likeCount = recipe.getInt("likesCount");
+                        String description = recipe.getString("description");
+
+                        JSONArray stepArray = recipe.getJSONArray("recipeSteps");
+                        for (int j = 0; j < stepArray.length(); j++) {
+                            JSONObject step = stepArray.getJSONObject(j);
+                            int stepId = step.getInt("id");
+                            String startTime = step.getString("startTime");
+                            String note = step.getString("note");
+                            steps.add(new RecipeStep(stepId,startTime,note));
+                        }
+                        JSONArray recipeIngredientArray = recipe.getJSONArray("recipeIngredients");
+                        for (int j = 0; j < recipeIngredientArray.length(); j++) {
+                            JSONObject recipeIngredient = recipeIngredientArray.getJSONObject(j);
+                            int ingredientId = recipeIngredient.getInt("id");
+//                            JSONObject ingredientObject = recipeIngredientArray.getJSONObject(1);
+//                            Ingredient ingredient=new Ingredient();
+                            int quantityRequired = recipeIngredient.getInt("quantityRequired");
+                            ingredients.add(new RecipeIngredient(ingredientId,quantityRequired));
+                        }
+                        recipes.add(new Recipe(id,name,link,likeCount,description,steps,ingredients));
+                    }
+                }
+                asyncResponse.onDataReceivedSuccess(recipes);
+            }
+            catch(JSONException e) {
+                e.printStackTrace();
+            }
+        }else {
             asyncResponse.onDataReceivedFailed();
         }
     }
 
     public interface AsyncResponse {
-        void onDataReceivedSuccess(String data);
+        void onDataReceivedSuccess(ArrayList<Recipe> data);
         void onDataReceivedFailed();
     }
 

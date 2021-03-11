@@ -1,16 +1,16 @@
-package com.example.android.customerapp;
+package com.example.android.customerapp.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.android.customerapp.R;
+
 import java.util.HashMap;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder> {
@@ -30,7 +30,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     @Override
     public ServiceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.message, parent, false);
+        View view = inflater.inflate(R.layout.layout_message_list_item, parent, false);
         return new ServiceViewHolder(view);
     }
 

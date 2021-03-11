@@ -4,6 +4,7 @@ package com.example.android.customerapp;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.android.customerapp.models.Member;
 import com.google.gson.Gson;
 import java.io.IOException;
 import okhttp3.MediaType;
@@ -12,7 +13,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class Post extends AsyncTask<String,String,String> {
+public class POST extends AsyncTask<String,String,String> {
     public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     public AsyncResponse asyncResponse;
     OkHttpClient client = new OkHttpClient();
@@ -49,7 +50,7 @@ public class Post extends AsyncTask<String,String,String> {
         if (result != null)
         {
             Gson gson = new Gson();
-            ResponseData data = gson.fromJson(result, ResponseData.class);
+            Member data = gson.fromJson(result, Member.class);
             asyncResponse.onDataReceivedSuccess(data);
         }
         else {
@@ -58,7 +59,7 @@ public class Post extends AsyncTask<String,String,String> {
     }
 
     public interface AsyncResponse {
-        void onDataReceivedSuccess(ResponseData data);
+        void onDataReceivedSuccess(Member data);
         void onDataReceivedFailed();
     }
 

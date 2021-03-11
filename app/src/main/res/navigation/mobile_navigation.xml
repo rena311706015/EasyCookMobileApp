@@ -6,18 +6,27 @@
     app:startDestination="@+id/navigation_home">
 
     <fragment
-        android:id="@+id/navigation_today"
-        android:name="com.example.android.customerapp.ui.today.TodayFragment"
-        android:label="@string/title_today"
-        tools:layout="@layout/fragment_today" >
-    </fragment>
-
-    <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.android.customerapp.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_all_recipe"
+        android:name="com.example.android.customerapp.ui.recipe.AllRecipeFragment"
+        android:label="@string/title_recipe"
+        tools:layout="@layout/fragment_all_recipe" >
+        <action
+            android:id="@+id/action_navigation_all_recipe_to_navigation_recipe"
+            app:destination="@id/navigation_recipe" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_recipe"
+        android:name="com.example.android.customerapp.ui.recipe.AllRecipeFragment"
+        android:label="@string/title_recipe"
+        tools:layout="@layout/fragment_recipe" />
 
     <fragment
         android:id="@+id/navigation_account"

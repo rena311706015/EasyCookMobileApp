@@ -1,14 +1,9 @@
 package com.example.android.customerapp;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.media.AudioManager;
 import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,30 +11,19 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.MediaController;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.net.URI;
-import java.sql.SQLOutput;
+import com.example.android.customerapp.models.RecipeVideoView;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 public class VideoPlayerActivity extends AppCompatActivity{
 
@@ -73,8 +57,8 @@ public class VideoPlayerActivity extends AppCompatActivity{
                 //設定recognizer
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
                 intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
-                intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS,500000);
-                intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS, 500000);
+                intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS,5000);
+                intent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS, 5000);
 
                 recognizer = SpeechRecognizer.createSpeechRecognizer(this);
                 recognizer.setRecognitionListener(new MyRecognizerListener());
@@ -146,17 +130,13 @@ public class VideoPlayerActivity extends AppCompatActivity{
                                 if(!isSpeechRecognizerAlive){
                                         recognizer.startListening(intent);
                                 }else{
+                                        recognizer.cancel();
                                         return;
                                 }
                         }else{    /*no match 使recognizer停留在stoplistening的狀態，因此需重新startListening
                                     但仍須先cancel，否則又會產生error:code 8*/
-//                                recognizer.cancel();
-//                                recognizer.startListening(intent);
-                                if(!isSpeechRecognizerAlive){
-                                        recognizer.startListening(intent);
-                                }else{
-                                        return;
-                                }
+                                recognizer.cancel();
+                                recognizer.startListening(intent);
                         }
 
 
@@ -186,26 +166,27 @@ public class VideoPlayerActivity extends AppCompatActivity{
                 @Override
                 public void onEndOfSpeech() {
                         Log.d("RECOGNIZER","end");
-                        recognizer.cancel();
-                        isSpeechRecognizerAlive = false;
+//                        recognizer.cancel();
+//                        recognizer.startListening(intent);
                         handler.postDelayed(() -> {
+                                recognizer.cancel();
                                 recognizer.startListening(intent);
                         }, 500);
                 }
 
                 @Override
                 public void onPartialResults(Bundle partialResults) {
-
-                        Log.d("RECOGNIZER","partialResults");
-                        List<String> resList = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-                        if(resList!=null){
-                                StringBuffer sb = new StringBuffer();
-                                for(String res: resList) {
-                                        sb.append(res);
-                                        break;
-                                }
-                                Log.d("RECOGNIZER", sb.toString());
-                        }
+//
+//                        Log.d("RECOGNIZER","partialResults");
+//                        List<String> resList = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+//                        if(resList!=null){
+//                                StringBuffer sb = new StringBuffer();
+//                                for(String res: resList) {
+//                                        sb.append(res);
+//                                        break;
+//                                }
+//                                Log.d("RECOGNIZER", sb.toString());
+//                        }
 
                 }
 
