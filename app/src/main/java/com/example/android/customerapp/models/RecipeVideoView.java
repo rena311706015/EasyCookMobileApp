@@ -2,24 +2,7 @@ package com.example.android.customerapp.models;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.VideoView;
-
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import com.example.android.customerapp.GET;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 public class RecipeVideoView extends VideoView {
     private PlayPauseListener mListener;
@@ -57,8 +40,10 @@ public class RecipeVideoView extends VideoView {
         }
     }
 
-    interface PlayPauseListener {
+
+    public interface PlayPauseListener {
         void onPlay();
         void onPause();
+
     }
 }

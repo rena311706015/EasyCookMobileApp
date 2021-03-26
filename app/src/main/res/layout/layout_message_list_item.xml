@@ -32,7 +32,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="5dp"
-        android:src="@drawable/rectangle"
+        android:src="@drawable/textview_shape"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/chat_image"

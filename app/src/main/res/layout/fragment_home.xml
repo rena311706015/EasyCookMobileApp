@@ -59,7 +59,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="@string/text_function1"
+        android:text="影音教學"
         app:layout_constraintTop_toBottomOf="@id/guidelineH37"
         app:layout_constraintBottom_toTopOf="@id/guidelineH42"
         app:layout_constraintStart_toStartOf="parent"

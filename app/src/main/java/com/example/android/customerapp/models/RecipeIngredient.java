@@ -1,11 +1,13 @@
 package com.example.android.customerapp.models;
 
-public class RecipeIngredient {
+import java.io.Serializable;
+
+public class RecipeIngredient implements Serializable {
     Ingredient ingredient;
     int id,requiredQuantity;
-    RecipeIngredient(int id, int requiredQuantity){
+    public RecipeIngredient(int id, Ingredient ingredient, int requiredQuantity){
         this.id=id;
-//        this.ingredient=ingredient;
+        this.ingredient=ingredient;
         this.requiredQuantity=requiredQuantity;
     }
 }
