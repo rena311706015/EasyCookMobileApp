@@ -1,26 +1,51 @@
 package com.example.android.customerapp.models;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcelable;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import org.checkerframework.checker.nullness.compatqual.NullableType;
 
+import java.io.InputStream;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Recipe implements Serializable{
-    private boolean[] photos;
-    private int id,likesCount,price;
-    private String name,link,description,version;
+    private Bitmap photoBitmap;
+    private int id, likesCount, price;
+    private String name, photo, link, description, version;
     private RecipeStep[] recipeSteps;
     private RecipeIngredient[] recipeIngredients;
 
-    public boolean[] getPhotos() {
-        return photos;
+    public Recipe(){}
+
+    public Recipe(Bitmap photoBitmap, int id, int likesCount, int price, String name, String photo, String link, String description, String version, RecipeStep[] recipeSteps, RecipeIngredient[] recipeIngredients) {
+        this.photoBitmap = photoBitmap;
+        this.id = id;
+        this.likesCount = likesCount;
+        this.price = price;
+        this.name = name;
+        this.photo = photo;
+        this.link = link;
+        this.description = description;
+        this.version = version;
+        this.recipeSteps = recipeSteps;
+        this.recipeIngredients = recipeIngredients;
     }
 
-    public void setPhotos(boolean[] photos) {
-        this.photos = photos;
+    public Bitmap getPhotoBitmap() {
+        return photoBitmap;
+    }
+
+    public void setPhotoBitmap(@Nullable Bitmap photoBitmap) {
+        this.photoBitmap = photoBitmap;
     }
 
     public int getId() {
@@ -53,6 +78,14 @@ public class Recipe implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public String getLink() {
@@ -94,17 +127,8 @@ public class Recipe implements Serializable{
     public void setRecipeIngredients(RecipeIngredient[] recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
-    public Recipe(){}
-    public Recipe(int id, int likesCount, int price, String name, String link, String description, String version, RecipeStep[] recipeSteps, RecipeIngredient[] recipeIngredients) {
-        this.id = id;
-        this.likesCount = likesCount;
-        this.price = price;
-        this.name = name;
-        this.link = link;
-        this.description = description;
-        this.version = version;
-        this.recipeSteps = recipeSteps;
-        this.recipeIngredients = recipeIngredients;
-    }
+
+
+
 
 }

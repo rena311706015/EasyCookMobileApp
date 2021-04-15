@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <com.example.android.customerapp.models.RecipeVideoView
         android:id="@+id/videoview"
         android:layout_width="0dp"
@@ -18,24 +19,36 @@
         android:src="@drawable/mic"
         android:scaleType="centerInside"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@id/guidelineH1"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH3"
+        app:layout_constraintTop_toTopOf="@id/guidelineH7"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH9"
         app:layout_constraintStart_toStartOf="@id/guidelineV7"
         app:layout_constraintEnd_toEndOf="@id/guidelineV9"/>
     <TextView
         android:id="@+id/step_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/white"
+        android:background="@drawable/textview_shapewhite"
+        android:textColor="@color/colorPrimaryDark"
         android:visibility="gone"
         android:gravity="center"
         android:textSize="25sp"
         app:layout_constraintTop_toTopOf="@id/guidelineH1"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guidelineV7"
-        />
-
+        app:layout_constraintStart_toStartOf="@id/guidelineV1"
+        app:layout_constraintEnd_toEndOf="@id/guidelineV9"/>
+    <TextView
+        android:id="@+id/hint_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/textview_shapewhite"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textSize="25sp"
+        app:layout_constraintTop_toTopOf="@id/guidelineH7"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH9"
+        app:layout_constraintStart_toStartOf="@id/guidelineV3"
+        app:layout_constraintEnd_toStartOf="@id/speak_image"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH1"
@@ -48,6 +61,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintGuide_percent="0.3"/>
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV7"

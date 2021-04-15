@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/navigation_all_recipe"
         android:name="com.example.android.customerapp.ui.recipe.AllRecipeFragment"
-        android:label="@string/title_recipe"
+        android:label="所有食譜"
         tools:layout="@layout/fragment_all_recipe" >
         <action
             android:id="@+id/action_navigation_all_recipe_to_navigation_recipe"
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/navigation_recipe"
-        android:name="com.example.android.customerapp.ui.recipe.AllRecipeFragment"
+        android:name="com.example.android.customerapp.ui.recipe.RecipeFragment"
         android:label="@string/title_recipe"
         tools:layout="@layout/fragment_recipe" />
 

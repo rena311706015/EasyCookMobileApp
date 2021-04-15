@@ -1,16 +1,11 @@
 package com.example.android.customerapp;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,20 +32,24 @@ import com.example.android.customerapp.models.RecipeStep;
 import com.example.android.customerapp.models.RecipeVideoView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import static android.app.PendingIntent.FLAG_NO_CREATE;
 
 public class VideoPlayerActivity extends AppCompatActivity{
 
-        private TextView stepText;
+        private TextView stepText, hintText;
         private ImageView speakImage;
         private ScaleAnimation animation;
         private RecipeVideoView recipeVideoView;
         private MediaController mediaController;
+
+        private boolean VIDEO_ISPLAYING = false;
+        private Recipe recipe;
+        private int currentTime;
+
         private ArrayList<RecipeStep> stepList;
-        private int index=0,countdown=0;
+        private int index=0;
         private SpeechRecognizer recognizer;
         private Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         final Handler handler = new Handler();
@@ -68,16 +67,21 @@ public class VideoPlayerActivity extends AppCompatActivity{
                 recipeVideoView=findViewById(R.id.videoview);
                 speakImage=findViewById(R.id.speak_image);
                 stepText=findViewById(R.id.step_text);
+                hintText=findViewById(R.id.hint_text);
                 //取得傳入的 Intent 物件
                 Intent recipeIntent = getIntent();
-                Recipe recipe = (Recipe) recipeIntent.getSerializableExtra("recipe");
+
+                recipe = (Recipe) recipeIntent.getSerializableExtra("recipe");
+                Log.e("RECIPE",recipe.getName());
+                currentTime = (int) recipeIntent.getIntExtra("time",0);
+
                 stepList=new ArrayList<>();
                 for(RecipeStep steps : recipe.getRecipeSteps()){
                         stepList.add(steps);
                 }
-//                stepList.add(0,new RecipeStep(30,5,"第5秒(請說開始計時)",10));
-//                stepList.add(1,new RecipeStep(30,10,"第10秒"));
-//                stepList.add(2,new RecipeStep(30,15,"第15秒"));
+                stepList.add(0,new RecipeStep(30,5,"第5秒",5));
+                stepList.add(1,new RecipeStep(30,10,"第10秒"));
+                stepList.add(2,new RecipeStep(30,15,"第15秒"));
                 //設定recognizer
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
                 intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
@@ -92,10 +96,11 @@ public class VideoPlayerActivity extends AppCompatActivity{
                 mediaController = new MediaController(VideoPlayerActivity.this);
                 recipeVideoView.setMediaController(mediaController);
                 mediaController.setMediaPlayer(recipeVideoView);     //MediaPlayer與MediaController互相連接
+                mediaController.setVisibility(View.GONE);         //隱藏進度條
                 recipeVideoView.setPlayPauseListener(new RecipeVideoView.PlayPauseListener() {
                         public void onPlay() {
                                 while(recipeVideoView.isPlaying()){
-                                        int currentTime=recipeVideoView.getCurrentPosition();
+                                        currentTime=recipeVideoView.getCurrentPosition();
                                         if(currentTime/1000==stepList.get(index).getStartTime()){
                                                 recipeVideoView.pause();
                                         }
@@ -103,6 +108,11 @@ public class VideoPlayerActivity extends AppCompatActivity{
                         }
 
                         public void onPause() {
+                                if(stepList.get(index).getTimer()!=0){
+                                        hintText.setText("請說「開始計時」");
+                                }else{
+                                        hintText.setText("請說「重播」/「下一步」");
+                                }
                                 stepText.setText(stepList.get(index).getNote());
                                 speakImage.setAnimation(animation);
                                 changeVisibility();
@@ -110,14 +120,30 @@ public class VideoPlayerActivity extends AppCompatActivity{
                         }
                 });
 
-                loadView(recipe.getLink());
+                loadView(recipe.getLink(),currentTime);
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//強制橫屏
         }
-        public void loadView(String path){
+        @Override
+        public void onNewIntent(Intent intent){
+              super.onNewIntent(intent);
+        }
+        @Override
+        public void onSaveInstanceState(Bundle savedInstanceState) {
+
+                Log.e("VIDEO","SAVE");
+                savedInstanceState.putBoolean("playing",VIDEO_ISPLAYING);
+                savedInstanceState.putSerializable("recipe",recipe);
+                savedInstanceState.putInt("time",currentTime);
+
+                super.onSaveInstanceState(savedInstanceState);
+        }
+
+        public void loadView(String path, int currentTime){
 
                 index=0;
                 Uri uri = Uri.parse(path);
-
+                VIDEO_ISPLAYING=true;
+                recipeVideoView.seekTo(currentTime);
                 recipeVideoView.setVideoURI(uri);
                 recipeVideoView.requestFocus();
                 recipeVideoView.start();
@@ -145,8 +171,8 @@ public class VideoPlayerActivity extends AppCompatActivity{
                                         public void onFinish() {
                                                 Log.e("VIDEO","onFinish");
                                                 sendNotification();
-
-                                                stepText.setText("請說下一步以繼續導覽");
+                                                stepText.setText("時間到");
+                                                hintText.setText("請說「下一步」以繼續導覽");
                                                 recognizer.startListening(intent);
                                         }
                                 };
@@ -165,7 +191,7 @@ public class VideoPlayerActivity extends AppCompatActivity{
                         }else if(sb.toString().equals("上一步")){
                                 recognizer.cancel();
                                 changeVisibility();
-                                recipeVideoView.seekTo(stepList.get(index).getStartTime());
+                                recipeVideoView.seekTo(stepList.get(index).getStartTime()*1000);
                                 handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
@@ -225,9 +251,6 @@ public class VideoPlayerActivity extends AppCompatActivity{
                         speakImage.clearAnimation();
                         recognizer.cancel();
                         recognizer.startListening(intent);
-//
-//                        handler.postDelayed(() -> {
-//                                }, 500);
                 }
 
                 @Override
@@ -258,6 +281,7 @@ public class VideoPlayerActivity extends AppCompatActivity{
                 if (recognizer != null) {
                         recognizer.destroy();
                 }
+                VIDEO_ISPLAYING=false;
         }
         public void setAnime(){
                 animation = new ScaleAnimation(
@@ -274,48 +298,41 @@ public class VideoPlayerActivity extends AppCompatActivity{
                 if(isVisible==true){
                         isVisible=false;
                         speakImage.setVisibility(View.GONE);
-                        stepText.setVisibility(View.INVISIBLE);
+                        stepText.setVisibility(View.GONE);
+                        hintText.setVisibility(View.GONE);
                 }else{
                         isVisible=true;
                         speakImage.setVisibility(View.VISIBLE);
                         stepText.setVisibility(View.VISIBLE);
+                        hintText.setVisibility(View.VISIBLE);
                 }
         }
         public void sendNotification(){
-//                NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "cook")
-//                        .setSmallIcon(R.drawable.icon)
-//                        .setContentTitle("My notification")
-//                        .setContentText("Much longer text that cannot fit one line...")
-//                        .setStyle(new NotificationCompat.BigTextStyle()
-//                                .bigText("Much longer text that cannot fit one line..."))
-//                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         CharSequence name = getString(R.string.channel_name);
                         int importance = NotificationManager.IMPORTANCE_DEFAULT;
                         NotificationChannel channel = new NotificationChannel("cook", name, importance);
                         channel.setDescription("description");
-                        // Register the channel with the system; you can't change the importance
-                        // or other notification behaviors after this
                         NotificationManager notificationManager = getSystemService(NotificationManager.class);
                         notificationManager.createNotificationChannel(channel);
                 }
                 Intent intent = new Intent(this, VideoPlayerActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_NO_CREATE);
+
+//                intent.setAction(Intent.ACTION_MAIN);
+//                intent.addCategory(Intent.CATEGORY_LAUNCHER);
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "cook")
                         .setSmallIcon(R.drawable.icon)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        // Set the intent that will fire when the user taps the notification
+                        .setContentTitle("時間到")
+                        .setContentText("請回到影片導覽以繼續教學")
+                        .setPriority(NotificationCompat.PRIORITY_MAX)
                         .setContentIntent(pendingIntent)
                         .setAutoCancel(true);
 
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
-// notificationId is a unique int for each notification that you must define
                 notificationManager.notify(1, builder.build());
         }
 }

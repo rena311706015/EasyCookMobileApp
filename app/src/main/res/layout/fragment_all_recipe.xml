@@ -1,53 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F2F2F2"
-    tools:context=".ui.recipe.AllRecipeFragment">
+<layout xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="com.example.android.customerapp.adapters.RecipeRecyclerAdapter"/>
+        <variable
+            name="myAdapter"
+            type="RecipeRecyclerAdapter" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
 
-    <TextView
-        android:id="@+id/text_dashboard"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="食譜總覽"
-        android:textSize="30sp"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH05"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        app:queryHint="例:三明治"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH05"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH1"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_recipes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            app:buttonGravity="center_vertical"
+            app:contentInsetStartWithNavigation="0dp"
+            app:title="食譜總覽"
+            app:titleTextColor="#FFF"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+        </androidx.appcompat.widget.Toolbar>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH05"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_recipes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adapter="@{myAdapter}"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.1"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

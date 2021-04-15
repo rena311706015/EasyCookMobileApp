@@ -1,73 +1,87 @@
 package com.example.android.customerapp.viewmodels;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.example.android.customerapp.R;
 import com.example.android.customerapp.models.Recipe;
-import com.example.android.customerapp.models.RecipeIngredient;
-import com.example.android.customerapp.models.RecipeStep;
-import com.example.android.customerapp.repositories.RecipeRepository;
+import com.example.android.customerapp.requests.PhotoAPIClient;
+import com.example.android.customerapp.requests.RecipeAPIClient;
+import com.google.protobuf.StringValue;
 
+import okhttp3.ResponseBody;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AllRecipeViewModel extends ViewModel {
 
-    private RecipeRepository mRecipeRepository;
-    private boolean mIsViewingRecipes;
-    private boolean mIsPerformingQuery;
+    public MediatorLiveData<List<Recipe>> mRecipeList;
 
     public AllRecipeViewModel() {
-        mRecipeRepository = RecipeRepository.getInstance();
-        mIsPerformingQuery = false;
+        mRecipeList = new MediatorLiveData<>();
     }
 
-    public LiveData<List<Recipe>> getRecipes(){
-        return mRecipeRepository.getAllRecipe();
+    public void getRecipeList(){
+        RecipeAPIClient.getInstance().getAllRecipe().enqueue(new Callback<List<Recipe>>() {
+            @Override
+            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+                Log.e("RECIPE","onResponse");
+                mRecipeList.setValue(response.body());
+                getPhoto();
+            }
+
+            @Override
+            public void onFailure(Call<List<Recipe>> call, Throwable t) {
+                Log.e("RECIPE","FAIL");
+                Log.e("RECIPE",t.getMessage());
+            }
+        });
     }
 
-    public LiveData<Recipe> getRecipe(){
-        return mRecipeRepository.getSelectedRecipe();
-    }
+    public void getPhoto(){
+        List<Recipe> recipeList = mRecipeList.getValue();
+        for(Recipe recipe : recipeList){
+            if(recipe.getPhoto().contains("http")){
+                String name = recipe.getPhoto().substring(recipe.getPhoto().lastIndexOf("/")+1);
+                PhotoAPIClient.getInstance().getPhoto(name).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        try {
+                            byte[] bytes;
+                            bytes = response.body().bytes();
+                            BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inSampleSize = 4;
+                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
 
-    public void getRecipeById(String id){
-        mRecipeRepository.getRecipe(id);
-    }
+                            Recipe recipeWithPhoto = recipe;
+                            recipeWithPhoto.setPhotoBitmap(bitmap);
+                            recipeList.set(recipeList.indexOf(recipe), recipeWithPhoto);
+                            mRecipeList.setValue(recipeList);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e("PHOTO",t.getMessage());
+                    }
+                });
+            }else{
+            }
 
-    public void searchRecipesApi(String query){
-        mIsViewingRecipes = true;
-        mIsPerformingQuery = true;
-        mRecipeRepository.searchRecipesApi(query);
-    }
-
-
-    public boolean isViewingRecipes(){
-        return mIsViewingRecipes;
-    }
-
-    public void setIsViewingRecipes(boolean isViewingRecipes){
-        mIsViewingRecipes = isViewingRecipes;
-    }
-
-    public void setIsPerformingQuery(Boolean isPerformingQuery){
-        mIsPerformingQuery = isPerformingQuery;
-    }
-
-    public boolean isPerformingQuery(){
-        return mIsPerformingQuery;
-    }
-
-    public boolean onBackPressed(){
-        if(mIsPerformingQuery){
-            // cancel the query
-            mIsPerformingQuery = false;
         }
-        if(mIsViewingRecipes){
-            mIsViewingRecipes = false;
-            return false;
-        }
-        return true;
+
     }
 }
