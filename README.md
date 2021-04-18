@@ -1,7 +1,7 @@
 # 專題APP 語音料理助手操作說明
 
 一進去會先看到主頁，可以直接點擊按鈕進行影片教學
-![](https://i.imgur.com/N4YEcvb.jpg =200x)
+https://i.imgur.com/N4YEcvb.jpg=200x
 
 選擇進行影音導覽的食譜
 ![](https://i.imgur.com/1iBa5J3.jpg =200x)
