@@ -79,9 +79,6 @@ public class VideoPlayerActivity extends AppCompatActivity{
                 for(RecipeStep steps : recipe.getRecipeSteps()){
                         stepList.add(steps);
                 }
-                stepList.add(0,new RecipeStep(30,5,"第5秒",5));
-                stepList.add(1,new RecipeStep(30,10,"第10秒"));
-                stepList.add(2,new RecipeStep(30,15,"第15秒"));
                 //設定recognizer
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
                 intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
@@ -101,7 +98,7 @@ public class VideoPlayerActivity extends AppCompatActivity{
                         public void onPlay() {
                                 while(recipeVideoView.isPlaying()){
                                         currentTime=recipeVideoView.getCurrentPosition();
-                                        if(currentTime/1000==stepList.get(index).getStartTime()){
+                                        if(currentTime==stepList.get(index).getStartTime()){
                                                 recipeVideoView.pause();
                                         }
                                 }
@@ -188,7 +185,7 @@ public class VideoPlayerActivity extends AppCompatActivity{
                                                 recipeVideoView.start();
                                         }
                                 },500);
-                        }else if(sb.toString().equals("上一步")){
+                        }else if(sb.toString().equals("重播")){
                                 recognizer.cancel();
                                 changeVisibility();
                                 recipeVideoView.seekTo(stepList.get(index).getStartTime()*1000);

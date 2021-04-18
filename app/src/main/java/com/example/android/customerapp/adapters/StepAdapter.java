@@ -1,6 +1,7 @@
 package com.example.android.customerapp.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -35,6 +36,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
         holder.getBinding().setStep(steps.get(position));
+        holder.getBinding().setStepNumber("第"+(position+1)+"步");
     }
 
 

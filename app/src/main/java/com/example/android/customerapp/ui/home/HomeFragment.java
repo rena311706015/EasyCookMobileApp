@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment {
                 else {
                     String string = "";
                     for(RecipeIngredient ri:recipe.getRecipeIngredients()){
-                        string+=ri.getIngredient().getName()+ ri.getQuantityRequired() * Integer.valueOf(input) +ri.getIngredient().getUnit()+"\r\n";
+                        string+=ri.getIngredient().getName()+ (int)ri.getQuantityRequired() * Integer.valueOf(input) +ri.getIngredient().getUnit()+"\r\n";
                     }
                     AlertDialog.Builder a = new AlertDialog.Builder(getContext());
                     a.setTitle("請準備以下食材");

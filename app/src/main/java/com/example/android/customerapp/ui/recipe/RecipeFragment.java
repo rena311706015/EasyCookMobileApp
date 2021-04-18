@@ -15,10 +15,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.customerapp.R;
 import com.example.android.customerapp.VideoPlayerActivity;
 import com.example.android.customerapp.adapters.BindingComponent;
+import com.example.android.customerapp.adapters.IngredientAdapter;
+import com.example.android.customerapp.adapters.RecipeRecyclerAdapter;
+import com.example.android.customerapp.adapters.StepAdapter;
 import com.example.android.customerapp.databinding.FragmentRecipeBinding;
 import com.example.android.customerapp.models.Ingredient;
 import com.example.android.customerapp.models.Recipe;
@@ -33,6 +38,11 @@ import java.util.List;
 public class RecipeFragment extends Fragment {
 
     private RecipeViewModel mRecipeViewModel;
+    private RecyclerView mIngredientRecyclerView;
+    private RecyclerView mStepRecyclerView;
+
+    private IngredientAdapter mIngredientAdapter;
+    private StepAdapter mStepAdapter;
     private Button videoButton;
     private Toolbar mToolbar;
     private Recipe mRecipe;
@@ -47,7 +57,8 @@ public class RecipeFragment extends Fragment {
 
         videoButton= root.findViewById(R.id.video_button);
         mToolbar = root.findViewById(R.id.toolbar);
-
+        mIngredientRecyclerView = root.findViewById(R.id.recipe_ingredients_list);
+        mStepRecyclerView=root.findViewById(R.id.recipe_steps_list);
 
         String id=(String)getArguments().getString("id");
 
@@ -72,20 +83,24 @@ public class RecipeFragment extends Fragment {
             List<String> steps = new ArrayList<>();
             for(RecipeIngredient ingredient : recipe.getRecipeIngredients()){
                 String ingredientName = ingredient.getIngredient().getName();
-                String ingredientQuantity = String.valueOf(ingredient.getQuantityRequired());
+                String ingredientQuantity = String.valueOf((int)ingredient.getQuantityRequired());
                 String ingredientUnit = ingredient.getIngredient().getUnit();
                 ingredients.add(ingredientName+"   "+ingredientQuantity+ingredientUnit);
             }
             for(RecipeStep step:recipe.getRecipeSteps()){
                 steps.add(step.getNote());
             }
+
+            mIngredientAdapter = new IngredientAdapter(getContext(),ingredients);
+            mIngredientRecyclerView.setAdapter(mIngredientAdapter);
+            mIngredientRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+            mStepAdapter = new StepAdapter(getContext(),steps);
+            mStepRecyclerView.setAdapter(mStepAdapter);
+            mStepRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
             binding.setRecipe(recipe);
-            binding.setIngredients(ingredients);
-            binding.setSteps(steps);
         });
-
-
         return root;
-
     }
 }
