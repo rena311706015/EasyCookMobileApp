@@ -47,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/recipe001"
+            android:src="@{recipe.photoBitmap}"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

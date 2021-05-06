@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,14 +21,11 @@ import com.example.android.customerapp.R;
 import com.example.android.customerapp.VideoPlayerActivity;
 import com.example.android.customerapp.adapters.BindingComponent;
 import com.example.android.customerapp.adapters.IngredientAdapter;
-import com.example.android.customerapp.adapters.RecipeRecyclerAdapter;
 import com.example.android.customerapp.adapters.StepAdapter;
 import com.example.android.customerapp.databinding.FragmentRecipeBinding;
-import com.example.android.customerapp.models.Ingredient;
 import com.example.android.customerapp.models.Recipe;
 import com.example.android.customerapp.models.RecipeIngredient;
 import com.example.android.customerapp.models.RecipeStep;
-import com.example.android.customerapp.viewmodels.AllRecipeViewModel;
 import com.example.android.customerapp.viewmodels.RecipeViewModel;
 
 import java.util.ArrayList;
@@ -50,7 +46,7 @@ public class RecipeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRecipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
-
+        Log.e("Fragment2","onCreateView");
         DataBindingUtil.setDefaultComponent(new BindingComponent());
         FragmentRecipeBinding binding= DataBindingUtil.inflate(inflater, R.layout.fragment_recipe,container, false);
         View root = binding.getRoot();
@@ -60,22 +56,18 @@ public class RecipeFragment extends Fragment {
         mIngredientRecyclerView = root.findViewById(R.id.recipe_ingredients_list);
         mStepRecyclerView=root.findViewById(R.id.recipe_steps_list);
 
-        String id=(String)getArguments().getString("id");
+        mRecipe = (Recipe)getArguments().getSerializable("recipe");
 
-        mRecipe = new Recipe();
-
-        mRecipeViewModel.getRecipeById(id);
+        mRecipeViewModel.getRecipeById(String.valueOf(mRecipe.getId()));
         mRecipeViewModel.mRecipe.observe(getViewLifecycleOwner(), recipe -> {
-
+            recipe.setPhotoBitmap(mRecipe.getPhotoBitmap());
             mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_baseline_arrow_back_24, null));
             mToolbar.inflateMenu(R.menu.search_menu);
 
             videoButton.setOnClickListener(v ->{
                 Intent intent = new Intent();
                 intent.setClass(getContext(), VideoPlayerActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("recipe", recipe);
-                intent.putExtras(bundle);
+                intent.putExtra("recipe",recipe);
                 startActivity(intent);
             });
 
@@ -102,5 +94,10 @@ public class RecipeFragment extends Fragment {
             binding.setRecipe(recipe);
         });
         return root;
+    }
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        Log.e("Fragment2","onDestroyView");
     }
 }

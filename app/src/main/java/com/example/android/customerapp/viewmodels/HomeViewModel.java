@@ -2,13 +2,11 @@ package com.example.android.customerapp.viewmodels;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.android.customerapp.models.Recipe;
-import com.example.android.customerapp.requests.RecipeAPIClient;
+import com.example.android.customerapp.requests.BackendAPIClient;
 
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     public void getRecipeList(){
-        RecipeAPIClient.getInstance().getAllRecipe().enqueue(new Callback<List<Recipe>>() {
+        BackendAPIClient.getInstance().getAllRecipe().enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 Log.e("ViewModel","onResponse");
@@ -41,7 +39,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     public void getRecipeById(String id){
-        RecipeAPIClient.getInstance().getRecipeById(id).enqueue(new Callback<Recipe>() {
+        BackendAPIClient.getInstance().getRecipeById(id).enqueue(new Callback<Recipe>() {
             @Override
             public void onResponse(Call<Recipe> call, Response<Recipe> response) {
                 Log.e("ViewModel","onResponse");

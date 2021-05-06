@@ -14,11 +14,34 @@
         app:layout_constraintBottom_toBottomOf="@id/guidelineH25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+        android:id="@+id/welcome_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="請先登入"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
     <Button
-        android:id="@+id/goLogin"
+        android:id="@+id/login"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="會員登入"
+        android:text="登入"
+        android:textSize="20sp"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/guidelineH25"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH35"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+        android:id="@+id/go_order"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="查看訂單"
         android:textSize="20sp"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="@id/guidelineH25"
@@ -26,17 +49,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
     <Button
-        android:id="@+id/goRegister"
+        android:id="@+id/logout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="會員註冊"
+        android:text="登出"
         android:textSize="20sp"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="@id/guidelineH35"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH25"
         android:layout_width="wrap_content"

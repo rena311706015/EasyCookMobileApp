@@ -4,21 +4,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
-import com.example.android.customerapp.R;
 import com.example.android.customerapp.models.Recipe;
 import com.example.android.customerapp.requests.PhotoAPIClient;
-import com.example.android.customerapp.requests.RecipeAPIClient;
-import com.google.protobuf.StringValue;
+import com.example.android.customerapp.requests.BackendAPIClient;
 
 import okhttp3.ResponseBody;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,7 +29,8 @@ public class AllRecipeViewModel extends ViewModel {
     }
 
     public void getRecipeList(){
-        RecipeAPIClient.getInstance().getAllRecipe().enqueue(new Callback<List<Recipe>>() {
+        //enqueue ->會另外開執行緒，所以可以不用再另外用runnable
+        BackendAPIClient.getInstance().getAllRecipe().enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 Log.e("RECIPE","onResponse");
@@ -59,16 +55,19 @@ public class AllRecipeViewModel extends ViewModel {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
-                            byte[] bytes;
-                            bytes = response.body().bytes();
-                            BitmapFactory.Options options = new BitmapFactory.Options();
-                            options.inSampleSize = 4;
-                            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+                            if(response.body() != null){
+                                byte[] bytes;
+                                bytes = response.body().bytes();
+                                BitmapFactory.Options options = new BitmapFactory.Options();
+                                options.inSampleSize = 4;
+                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
 
-                            Recipe recipeWithPhoto = recipe;
-                            recipeWithPhoto.setPhotoBitmap(bitmap);
-                            recipeList.set(recipeList.indexOf(recipe), recipeWithPhoto);
-                            mRecipeList.setValue(recipeList);
+                                Recipe recipeWithPhoto = recipe;
+                                recipeWithPhoto.setPhotoBitmap(bitmap);
+                                recipeList.set(recipeList.indexOf(recipe), recipeWithPhoto);
+                                mRecipeList.setValue(recipeList);
+                            }
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -78,7 +77,6 @@ public class AllRecipeViewModel extends ViewModel {
                         Log.e("PHOTO",t.getMessage());
                     }
                 });
-            }else{
             }
 
         }

@@ -34,23 +34,47 @@
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account" >
         <action
+            android:id="@+id/action_navigation_account_to_navigation_all_order"
+            app:destination="@id/navigation_all_order" />
+        <action
             android:id="@+id/action_navigation_account_to_navigation_login"
             app:destination="@id/navigation_login" />
-        <action
-            android:id="@+id/action_navigation_account_to_navigation_register"
-            app:destination="@id/navigation_register" />
     </fragment>
-
+    <fragment
+        android:id="@+id/navigation_all_order"
+        android:name="com.example.android.customerapp.ui.account.AllOrderFragment"
+        android:label="訂單總覽"
+        tools:layout="@layout/fragment_all_order" >
+        <action
+            android:id="@+id/action_navigation_all_order_to_navigation_order"
+            app:destination="@id/navigation_order" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_order"
+        android:name="com.example.android.customerapp.ui.account.OrderFragment"
+        android:label="訂單"
+        tools:layout="@layout/fragment_order" >
+    </fragment>
     <fragment
         android:id="@+id/navigation_login"
         android:name="com.example.android.customerapp.ui.account.LoginFragment"
         android:label="登入"
-        tools:layout="@layout/fragment_account_login" >
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_register"
+            app:destination="@id/navigation_register" />
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_account"
+            app:destination="@id/navigation_account" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_register"
         android:name="com.example.android.customerapp.ui.account.RegisterFragment"
         android:label="註冊"
-        tools:layout="@layout/fragment_account_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_navigation_register_to_navigation_login"
+            app:destination="@id/navigation_login" />
+    </fragment>
 </navigation>

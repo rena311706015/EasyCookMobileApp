@@ -2,6 +2,7 @@ package com.example.android.customerapp.models;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.widget.VideoView;
 
 public class RecipeVideoView extends VideoView {
@@ -19,6 +20,10 @@ public class RecipeVideoView extends VideoView {
         super(context, attrs, defStyle);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return super.onKeyDown(keyCode, event);
+    }
 
     public void setPlayPauseListener(PlayPauseListener listener) {
         mListener = listener;

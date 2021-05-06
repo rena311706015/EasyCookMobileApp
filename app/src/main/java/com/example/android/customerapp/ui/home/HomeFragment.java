@@ -3,13 +3,16 @@ package com.example.android.customerapp.ui.home;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,7 +60,7 @@ public class HomeFragment extends Fragment {
                 String[] recipeNameList=new String[mRecipeList.size()];
                 int index=0;
                 for(Recipe recipe:mRecipeList){
-                    recipeNameList[index]=recipe.getName();
+                    recipeNameList[index]=recipe.getName()+"  "+recipe.getVersion();
                     index+=1;
                 }
                 AlertDialog.Builder dialog_list = new AlertDialog.Builder(getContext());
@@ -80,7 +83,8 @@ public class HomeFragment extends Fragment {
         //確認份數
         final EditText editText = new EditText(getContext());
         editText.setGravity(Gravity.RIGHT);
-        new AlertDialog.Builder(getContext()).setTitle("請輸入份數")
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+        final AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setTitle("請輸入份數")
             .setIcon(R.drawable.icon)
             .setView(editText)
             .setPositiveButton("確定", (dialog, num) -> {
@@ -93,28 +97,45 @@ public class HomeFragment extends Fragment {
                     for(RecipeIngredient ri:recipe.getRecipeIngredients()){
                         string+=ri.getIngredient().getName()+ (int)ri.getQuantityRequired() * Integer.valueOf(input) +ri.getIngredient().getUnit()+"\r\n";
                     }
-                    AlertDialog.Builder a = new AlertDialog.Builder(getContext());
-                    a.setTitle("請準備以下食材");
-                    a.setMessage(string);
-
-                    a.setPositiveButton("確定", (dialog1, num1) -> {
+                    AlertDialog a = new AlertDialog.Builder(getContext()).setTitle("請準備以下食材("+input+"人份)")
+                    .setMessage(string)
+                    .setPositiveButton("確定", (dialog1, num1) -> {
                         Intent intent = new Intent();
                         intent.setClass(getContext(), VideoPlayerActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("recipe", recipe);
                         intent.putExtras(bundle);
                         startActivity(intent);
-                    });
-                    a.setNegativeButton("取消", (dialog1, num1) -> {
+                    })
+                    .setNegativeButton("取消", (dialog1, num1) -> {
                         dialog1.cancel();
-                    });
+                    }).create();
                     dialog.cancel();
+                    a.setOnShowListener(new DialogInterface.OnShowListener() {
+                        @Override
+                        public void onShow(DialogInterface dialog) {
+                            Button positiveButton = a.getButton(AlertDialog.BUTTON_POSITIVE);
+                            positiveButton.setTextColor(Color.DKGRAY);
+                            Button negativeButton = a.getButton(AlertDialog.BUTTON_NEGATIVE);
+                            negativeButton.setTextColor(Color.DKGRAY);
+                        }
+                    });
                     a.show();
                 }
             })
             .setNegativeButton("取消", (dialog, num) -> {
                 dialog.cancel();
-            }).show();
+            }).create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setTextColor(Color.DKGRAY);
+                Button negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+                negativeButton.setTextColor(Color.DKGRAY);
+            }
+        });
+        alertDialog.show();
 
     }
 }

@@ -1,15 +1,19 @@
 package com.example.android.customerapp.viewmodels;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.android.customerapp.models.Recipe;
-import com.example.android.customerapp.requests.RecipeAPIClient;
+import com.example.android.customerapp.requests.BackendAPIClient;
+import com.example.android.customerapp.requests.PhotoAPIClient;
 
-import java.util.List;
+import java.io.IOException;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,11 +26,12 @@ public class RecipeViewModel extends ViewModel {
         mRecipe = new MediatorLiveData<>();
     }
     public void getRecipeById(String id){
-        RecipeAPIClient.getInstance().getRecipeById(id).enqueue(new Callback<Recipe>() {
+        BackendAPIClient.getInstance().getRecipeById(id).enqueue(new Callback<Recipe>() {
             @Override
             public void onResponse(Call<Recipe> call, Response<Recipe> response) {
                 Log.e("ViewModel","onResponse");
                 mRecipe.setValue(response.body());
+//                getPhoto();
             }
 
             @Override
@@ -35,4 +40,5 @@ public class RecipeViewModel extends ViewModel {
             }
         });
     }
+
 }
