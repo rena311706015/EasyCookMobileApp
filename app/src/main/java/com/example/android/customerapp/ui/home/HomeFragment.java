@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.android.customerapp.CustomerServiceActivity;
 import com.example.android.customerapp.MainActivity;
@@ -51,6 +52,7 @@ public class HomeFragment extends Fragment {
 
         mRecipeList = new ArrayList<>();
         lodingDialog = new LodingDialog(getContext());
+
 
         toVideoPlayer.setOnClickListener(v -> {
             lodingDialog.show();
@@ -111,14 +113,11 @@ public class HomeFragment extends Fragment {
                         dialog1.cancel();
                     }).create();
                     dialog.cancel();
-                    a.setOnShowListener(new DialogInterface.OnShowListener() {
-                        @Override
-                        public void onShow(DialogInterface dialog) {
-                            Button positiveButton = a.getButton(AlertDialog.BUTTON_POSITIVE);
-                            positiveButton.setTextColor(Color.DKGRAY);
-                            Button negativeButton = a.getButton(AlertDialog.BUTTON_NEGATIVE);
-                            negativeButton.setTextColor(Color.DKGRAY);
-                        }
+                    a.setOnShowListener(dialog12 -> {
+                        Button positiveButton = a.getButton(AlertDialog.BUTTON_POSITIVE);
+                        positiveButton.setTextColor(Color.DKGRAY);
+                        Button negativeButton = a.getButton(AlertDialog.BUTTON_NEGATIVE);
+                        negativeButton.setTextColor(Color.DKGRAY);
                     });
                     a.show();
                 }

@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class RecipeStep implements Serializable {
     int id;
-    int startTime;
+    long startTime;
     int timer;
     String note;
     public RecipeStep(){};
-    public RecipeStep(int id, int startTime, String note, int timer){
+    public RecipeStep(int id, long startTime, String note, int timer){
         this.id=id;
         this.startTime=startTime;
         this.timer=timer;
         this.note=note;
     }
-    public RecipeStep(int id, int startTime, String note){
+    public RecipeStep(int id, long startTime, String note){
         this.id=id;
         this.startTime=startTime;
         this.timer=0;
@@ -29,11 +29,11 @@ public class RecipeStep implements Serializable {
         return id;
     }
 
-    public int getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(int startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 

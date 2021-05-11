@@ -29,9 +29,7 @@ public class RecipeViewModel extends ViewModel {
         BackendAPIClient.getInstance().getRecipeById(id).enqueue(new Callback<Recipe>() {
             @Override
             public void onResponse(Call<Recipe> call, Response<Recipe> response) {
-                Log.e("ViewModel","onResponse");
                 mRecipe.setValue(response.body());
-//                getPhoto();
             }
 
             @Override

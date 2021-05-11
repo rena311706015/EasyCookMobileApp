@@ -18,7 +18,7 @@ public class BindingAdapter extends MyBindingAdapter {
         if(value!= null){
             view.setImageBitmap(value);
         }else{
-            view.setImageResource(R.drawable.recipe001);
+            view.setImageResource(R.drawable.loding);
         }
     }
 }

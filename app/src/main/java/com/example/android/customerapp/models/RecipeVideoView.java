@@ -19,12 +19,6 @@ public class RecipeVideoView extends VideoView {
     public RecipeVideoView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return super.onKeyDown(keyCode, event);
-    }
-
     public void setPlayPauseListener(PlayPauseListener listener) {
         mListener = listener;
     }
@@ -49,6 +43,6 @@ public class RecipeVideoView extends VideoView {
     public interface PlayPauseListener {
         void onPlay();
         void onPause();
-
     }
+
 }

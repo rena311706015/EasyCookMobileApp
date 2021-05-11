@@ -4,14 +4,30 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.example.android.customerapp.models.RecipeVideoView
-        android:id="@+id/videoview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+<!--    <com.example.android.customerapp.models.RecipeVideoView-->
+<!--        android:id="@+id/video_view"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+<!--    <VideoView-->
+<!--        android:id="@+id/video_view"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+    <com.google.android.exoplayer2.ui.PlayerView
+            android:id="@+id/video_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     <ImageView
         android:id="@+id/speak_image"
         android:layout_width="0dp"
@@ -47,7 +63,7 @@
         android:textSize="25sp"
         app:layout_constraintTop_toTopOf="@id/guidelineH7"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH9"
-        app:layout_constraintStart_toStartOf="@id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@id/guidelineV1"
         app:layout_constraintEnd_toStartOf="@id/speak_image"/>
 
     <androidx.constraintlayout.widget.Guideline

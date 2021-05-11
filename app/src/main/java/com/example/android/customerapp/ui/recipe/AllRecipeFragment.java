@@ -10,11 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.customerapp.MainActivity;
 import com.example.android.customerapp.R;
 import com.example.android.customerapp.adapters.OnRecipeListener;
 import com.example.android.customerapp.adapters.RecipeAdapter;
@@ -33,11 +36,10 @@ public class AllRecipeFragment extends Fragment implements OnRecipeListener {
     private Toolbar mToolbar;
     private List<Recipe> mRecipeList;
     private LodingDialog lodingDialog;
-
+    public AllRecipeFragment(){}
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        Log.e("Fragment1","onCreateView");
         mAllRecipeViewModel = ViewModelProviders.of(this).get(AllRecipeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_all_recipe, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_recipes);
@@ -53,10 +55,8 @@ public class AllRecipeFragment extends Fragment implements OnRecipeListener {
 
         mAllRecipeViewModel.getRecipeList();
         mAllRecipeViewModel.mRecipeList.observe(getViewLifecycleOwner(), recipeList -> {
-            Log.e("RecipeList","OBSERVE");
             mRecipeList=recipeList;
             mAdapter.setRecipeList(recipeList);
-            lodingDialog.dismiss();
         });
         initRecyclerView();
         return root;
@@ -66,19 +66,15 @@ public class AllRecipeFragment extends Fragment implements OnRecipeListener {
         mAdapter = new RecipeAdapter(getContext(),this,mRecipeList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        lodingDialog.dismiss();
     }
 
     @Override
     public void onRecipeClick(int position) {
-            Bundle bundle = new Bundle();
-            bundle.putString("id", String.valueOf(mRecipeList.get(position).getId()));
-            bundle.putSerializable("recipe",mRecipeList.get(position));
-            Navigation.findNavController(getView()).navigate(R.id.action_navigation_all_recipe_to_navigation_recipe,bundle);
-    }
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        Log.e("Fragment1","onDestroyView");
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("recipe",mRecipeList.get(position));
+        ((MainActivity)getActivity()).onRecipeClick(bundle);
+//        Navigation.findNavController(getView()).navigate(R.id.action_navigation_all_recipe_to_navigation_recipe,bundle);
     }
 
 }

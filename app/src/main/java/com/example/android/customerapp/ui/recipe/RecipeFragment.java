@@ -3,6 +3,7 @@ package com.example.android.customerapp.ui.recipe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.customerapp.MainActivity;
 import com.example.android.customerapp.R;
 import com.example.android.customerapp.VideoPlayerActivity;
 import com.example.android.customerapp.adapters.BindingComponent;
@@ -43,10 +50,10 @@ public class RecipeFragment extends Fragment {
     private Toolbar mToolbar;
     private Recipe mRecipe;
 
+    public RecipeFragment(){}
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRecipeViewModel = ViewModelProviders.of(this).get(RecipeViewModel.class);
-        Log.e("Fragment2","onCreateView");
         DataBindingUtil.setDefaultComponent(new BindingComponent());
         FragmentRecipeBinding binding= DataBindingUtil.inflate(inflater, R.layout.fragment_recipe,container, false);
         View root = binding.getRoot();
@@ -60,16 +67,19 @@ public class RecipeFragment extends Fragment {
 
         mRecipeViewModel.getRecipeById(String.valueOf(mRecipe.getId()));
         mRecipeViewModel.mRecipe.observe(getViewLifecycleOwner(), recipe -> {
+
             recipe.setPhotoBitmap(mRecipe.getPhotoBitmap());
-            mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_baseline_arrow_back_24, null));
-            mToolbar.inflateMenu(R.menu.search_menu);
 
             videoButton.setOnClickListener(v ->{
                 Intent intent = new Intent();
                 intent.setClass(getContext(), VideoPlayerActivity.class);
-                intent.putExtra("recipe",recipe);
-                startActivity(intent);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("recipe", recipe);
+                startActivity(intent,bundle);
             });
+
+            mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_baseline_arrow_back_24, null));
+            mToolbar.inflateMenu(R.menu.search_menu);
 
             List<String> ingredients = new ArrayList<>();
             List<String> steps = new ArrayList<>();
@@ -93,11 +103,7 @@ public class RecipeFragment extends Fragment {
 
             binding.setRecipe(recipe);
         });
+
         return root;
-    }
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        Log.e("Fragment2","onDestroyView");
     }
 }

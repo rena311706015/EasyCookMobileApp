@@ -7,6 +7,7 @@
             type="com.example.android.customerapp.adapters.RecipeAdapter" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_all_recipe"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"

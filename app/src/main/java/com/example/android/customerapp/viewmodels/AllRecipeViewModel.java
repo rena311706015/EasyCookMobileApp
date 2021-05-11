@@ -33,7 +33,6 @@ public class AllRecipeViewModel extends ViewModel {
         BackendAPIClient.getInstance().getAllRecipe().enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                Log.e("RECIPE","onResponse");
                 mRecipeList.setValue(response.body());
                 getPhoto();
             }
