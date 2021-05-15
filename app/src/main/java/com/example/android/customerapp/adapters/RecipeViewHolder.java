@@ -1,19 +1,15 @@
 package com.example.android.customerapp.adapters;
 
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.customerapp.R;
-import com.example.android.customerapp.databinding.LayoutIngredientListItemBinding;
 import com.example.android.customerapp.databinding.LayoutRecipeListItemBinding;
 
-public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private LayoutRecipeListItemBinding binding;
     private OnRecipeListener onRecipeListener;
+
     public RecipeViewHolder(LayoutRecipeListItemBinding binding, OnRecipeListener onRecipeListener) {
 
         super(binding.getRoot());
@@ -22,6 +18,7 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.On
         itemView.setOnClickListener(this);
 
     }
+
     @Override
     public void onClick(View v) {
         onRecipeListener.onRecipeClick(getAdapterPosition());

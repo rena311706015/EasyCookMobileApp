@@ -1,24 +1,23 @@
 package com.example.android.customerapp.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.customerapp.R;
-import com.example.android.customerapp.databinding.LayoutStepListItemBinding;
+import com.example.android.customerapp.models.RecipeStep;
 
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class StepAdapter extends RecyclerView.Adapter<StepViewHolder> {
     private Context context;
-    private List<String> steps;
+    private RecipeStep[] steps;
 
-    public StepAdapter(Context context, List<String> steps) {
+    public StepAdapter(Context context, RecipeStep[] steps) {
         this.context = context;
         this.steps = steps;
     }
@@ -26,23 +25,29 @@ public class StepAdapter extends RecyclerView.Adapter<StepViewHolder> {
     @NonNull
     @Override
     public StepViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutStepListItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context),
-                R.layout.layout_step_list_item, parent, false);
-        return new StepViewHolder(binding);
-
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_step_list_item, parent, false);
+        return new StepViewHolder(view);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
-        holder.getBinding().setStep(steps.get(position));
-        holder.getBinding().setStepNumber("第"+(position+1)+"步");
+        long minute = TimeUnit.MILLISECONDS.toMinutes(steps[position].getStartTime());
+        long second = TimeUnit.MILLISECONDS.toSeconds(steps[position].getStartTime()) - TimeUnit.MINUTES.toSeconds(minute);
+
+        if (second < 10) {
+            holder.stepTime.setText("0" + minute + ":0" + second);
+        } else {
+            holder.stepTime.setText("0" + minute + ":" + second);
+        }
+        holder.stepId.setText(String.valueOf(position + 1));
+        holder.stepDescription.setText(steps[position].getNote());
     }
 
 
     @Override
     public int getItemCount() {
 
-        return steps == null ? 0 : steps.size();
+        return steps == null ? 0 : steps.length;
     }
 }

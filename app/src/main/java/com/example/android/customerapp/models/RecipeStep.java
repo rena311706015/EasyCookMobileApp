@@ -7,18 +7,24 @@ public class RecipeStep implements Serializable {
     long startTime;
     int timer;
     String note;
-    public RecipeStep(){};
-    public RecipeStep(int id, long startTime, String note, int timer){
-        this.id=id;
-        this.startTime=startTime;
-        this.timer=timer;
-        this.note=note;
+
+    public RecipeStep() {
     }
-    public RecipeStep(int id, long startTime, String note){
-        this.id=id;
-        this.startTime=startTime;
-        this.timer=0;
-        this.note=note;
+
+    ;
+
+    public RecipeStep(int id, long startTime, String note, int timer) {
+        this.id = id;
+        this.startTime = startTime;
+        this.timer = timer;
+        this.note = note;
+    }
+
+    public RecipeStep(int id, long startTime, String note) {
+        this.id = id;
+        this.startTime = startTime;
+        this.timer = 0;
+        this.note = note;
     }
 
     public void setId(int id) {
@@ -48,6 +54,7 @@ public class RecipeStep implements Serializable {
     public String getNote() {
         return note;
     }
+
     public void setNote(String note) {
         this.note = note;
     }

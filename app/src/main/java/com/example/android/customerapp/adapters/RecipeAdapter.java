@@ -21,10 +21,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeViewHolder> {
     private OnRecipeListener mOnRecipeListener;
 
     public RecipeAdapter(Context context, OnRecipeListener mOnRecipeListener, List<Recipe> recipes) {
-        this.context=context;
+        this.context = context;
         this.mOnRecipeListener = mOnRecipeListener;
-        this.recipeList=recipes;
+        this.recipeList = recipes;
     }
+
     @NonNull
     @Override
     public RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,13 +42,14 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeViewHolder> {
         binding.executePendingBindings();
     }
 
-    public void setRecipeList(List<Recipe> recipes){
+    public void setRecipeList(List<Recipe> recipes) {
         recipeList = recipes;
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
-        if(recipeList != null){
+        if (recipeList != null) {
             return recipeList.size();
         }
         return 0;

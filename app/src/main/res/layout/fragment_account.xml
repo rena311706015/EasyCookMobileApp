@@ -25,12 +25,13 @@
         app:layout_constraintBottom_toBottomOf="@id/guidelineH25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
     <Button
         android:id="@+id/login"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="登入"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:background="@color/white"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="@id/guidelineH25"
@@ -42,8 +43,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="查看訂單"
-        android:textSize="20sp"
-        android:background="@color/white"
+        android:textSize="18sp"
         app:layout_constraintTop_toTopOf="@id/guidelineH25"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH35"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="登出"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="@id/guidelineH35"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH45"

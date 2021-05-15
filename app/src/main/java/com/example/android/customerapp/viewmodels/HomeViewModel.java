@@ -23,32 +23,32 @@ public class HomeViewModel extends ViewModel {
         mRecipeList = new MediatorLiveData<>();
     }
 
-    public void getRecipeList(){
+    public void getRecipeList() {
         BackendAPIClient.getInstance().getAllRecipe().enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                Log.e("ViewModel","onResponse");
+                Log.e("ViewModel", "onResponse");
                 mRecipeList.setValue(response.body());
             }
 
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                Log.e("API","FAIL");
+                Log.e("API", "FAIL");
             }
         });
     }
 
-    public void getRecipeById(String id){
+    public void getRecipeById(String id) {
         BackendAPIClient.getInstance().getRecipeById(id).enqueue(new Callback<Recipe>() {
             @Override
             public void onResponse(Call<Recipe> call, Response<Recipe> response) {
-                Log.e("ViewModel","onResponse");
+                Log.e("ViewModel", "onResponse");
                 mRecipe.setValue(response.body());
             }
 
             @Override
             public void onFailure(Call<Recipe> call, Throwable t) {
-                Log.e("API","FAIL");
+                Log.e("API", "FAIL");
             }
         });
     }

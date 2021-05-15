@@ -1,19 +1,18 @@
 package com.example.android.customerapp.adapters;
 
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.android.customerapp.databinding.FragmentRecipeBinding;
-import com.example.android.customerapp.databinding.LayoutIngredientListItemBinding;
-import com.example.android.customerapp.models.Ingredient;
+
+import com.example.android.customerapp.R;
 
 public class IngredientViewHolder extends RecyclerView.ViewHolder {
-    private LayoutIngredientListItemBinding binding;
+    public TextView ingredient;
 
-    public IngredientViewHolder(LayoutIngredientListItemBinding binding) {
-        super(binding.getRoot());
-        this.binding = binding;
-    }
-
-    public LayoutIngredientListItemBinding getBinding() {
-        return binding;
+    public IngredientViewHolder(@NonNull View itemView) {
+        super(itemView);
+        ingredient = itemView.findViewById(R.id.ingredient);
     }
 }

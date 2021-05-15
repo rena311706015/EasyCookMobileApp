@@ -5,19 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
-    android:id="@+id/fragment_home">
-
-    <ImageView
-        android:id="@+id/image_home"
+    tools:context=".ui.home.HomeFragment">
+    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+        android:id="@+id/carousel"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/background"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH25"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH35"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:id="@+id/function1"
         android:layout_width="0dp"
@@ -28,34 +24,10 @@
         android:gravity="center"
         android:background="@drawable/icon_background"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH3"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH37"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH35"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="影音教學"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH37"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH42"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH3"
@@ -64,15 +36,15 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3"/>
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH37"
+        android:id="@+id/guidelineH35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.37"/>
+        app:layout_constraintGuide_percent="0.35"/>
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH42"
+        android:id="@+id/guidelineH4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.42"/>
+        app:layout_constraintGuide_percent="0.4"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

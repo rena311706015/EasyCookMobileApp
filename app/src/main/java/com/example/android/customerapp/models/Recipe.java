@@ -1,30 +1,21 @@
 package com.example.android.customerapp.models;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Parcelable;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import org.checkerframework.checker.nullness.compatqual.NullableType;
-
-import java.io.InputStream;
 import java.io.Serializable;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Recipe implements Serializable{
+public class Recipe implements Serializable {
     private Bitmap photoBitmap;
     private int id, likesCount, price;
     private String name, photo, link, description, version;
     private RecipeStep[] recipeSteps;
     private RecipeIngredient[] recipeIngredients;
 
-    public Recipe(){}
+
+    public Recipe() {
+    }
 
     public Recipe(Bitmap photoBitmap, int id, int likesCount, int price, String name, String photo, String link, String description, String version, RecipeStep[] recipeSteps, RecipeIngredient[] recipeIngredients) {
         this.photoBitmap = photoBitmap;
@@ -105,6 +96,14 @@ public class Recipe implements Serializable{
     }
 
     public String getVersion() {
+        switch (version) {
+            case "NORMAL":
+                return "正常";
+            case "LOWFAT":
+                return "低脂";
+            case "VAGE":
+                return "素食";
+        }
         return version;
     }
 
@@ -127,8 +126,6 @@ public class Recipe implements Serializable{
     public void setRecipeIngredients(RecipeIngredient[] recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
-
-
 
 
 }

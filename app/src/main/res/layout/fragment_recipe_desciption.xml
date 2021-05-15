@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.android.customerapp.models.Recipe" />
+
+        <variable
+            name="recipe"
+            type="Recipe" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/fragment_recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                android:id="@+id/recipe_carousel"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                app:layout_constraintBottom_toTopOf="@id/recipe_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/recipe_version"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textview_shapeprimary"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="@{recipe.version}"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/recipe_carousel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guidelineV75"
+                app:layout_constraintTop_toTopOf="@id/recipe_carousel"
+                tools:text="Version" />
+
+            <TextView
+                android:id="@+id/recipe_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center|left"
+                android:text="@{recipe.name}"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@id/recipe_description"
+                app:layout_constraintEnd_toEndOf="@id/guidelineV75"
+                app:layout_constraintStart_toStartOf="@id/guidelineV025"
+                app:layout_constraintTop_toBottomOf="@id/recipe_carousel"
+                tools:text="Name" />
+
+            <ImageView
+                android:id="@+id/grid_recipe_likesCount_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/like"
+                app:layout_constraintBottom_toBottomOf="@id/recipe_name"
+                app:layout_constraintEnd_toEndOf="@id/guidelineV85"
+                app:layout_constraintStart_toEndOf="@id/guidelineV75"
+                app:layout_constraintTop_toTopOf="@id/recipe_name" />
+
+            <TextView
+                android:id="@+id/grid_recipe_likesCount"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center|left"
+                android:paddingLeft="5dp"
+                android:text="@{String.valueOf(recipe.likesCount)}"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/recipe_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/grid_recipe_likesCount_image"
+                app:layout_constraintTop_toTopOf="@id/recipe_name"
+                tools:text="123" />
+
+            <TextView
+                android:id="@+id/recipe_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="center|left"
+                android:text="@{recipe.description}"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toTopOf="@id/ingredient_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineV025"
+                app:layout_constraintTop_toBottomOf="@id/recipe_name"
+                tools:text="Description" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/textview_shape"
+                app:layout_constraintBottom_toBottomOf="@id/ingredient_text"
+                app:layout_constraintEnd_toEndOf="@id/guidelineV025"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ingredient_text" />
+
+            <TextView
+                android:id="@+id/ingredient_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:paddingLeft="10dp"
+                android:text="所需材料"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@id/recipe_ingredients_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineV025"
+                app:layout_constraintTop_toBottomOf="@id/recipe_description" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recipe_ingredients_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ingredient_text" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineV025"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.025" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineV75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineV85"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.85" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

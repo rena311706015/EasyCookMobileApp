@@ -12,14 +12,14 @@ public class ServiceGenerator {
 
     private static Retrofit.Builder retrofitBuilder =
             new Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create());
+                    .baseUrl(Constants.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create());
 
     private static Retrofit retrofit = retrofitBuilder.build();
 
     private static BackendAPI backendApi = retrofit.create(BackendAPI.class);
 
-    public static BackendAPI getBackendApi(){
+    public static BackendAPI getBackendApi() {
         return backendApi;
     }
 }

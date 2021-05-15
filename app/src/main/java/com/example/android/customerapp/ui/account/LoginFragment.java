@@ -20,6 +20,8 @@ import com.example.android.customerapp.R;
 import com.example.android.customerapp.models.Member;
 import com.example.android.customerapp.viewmodels.LoginViewModel;
 
+import java.security.NoSuchAlgorithmException;
+
 public class LoginFragment extends Fragment {
 
     private LoginViewModel loginViewModel;
@@ -37,26 +39,32 @@ public class LoginFragment extends Fragment {
 
         loginButton = root.findViewById(R.id.login);
         loginButton.setOnClickListener(view -> {
-            final Member member = new Member(account.getText().toString(),password.getText().toString());
-            loginViewModel.memberLogin(member);
+            final Member member = new Member(account.getText().toString(), password.getText().toString());
+            try {
+                loginViewModel.memberLogin(member);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
             loginViewModel.token.observe(getViewLifecycleOwner(), token -> {
                 saveToken(token);
-                Toast.makeText(getContext(),"登入成功",Toast.LENGTH_LONG);
+                Toast.makeText(getContext(), "登入成功", Toast.LENGTH_LONG);
+//                ((MainActivity)getActivity()).getNavController().navigate(R.id.action_navigation_login_to_navigation_account);
                 Navigation.findNavController(view).navigate(R.id.action_navigation_login_to_navigation_account);
             });
 
         });
 
         goRegister = root.findViewById(R.id.go_register);
+//        goRegister.setOnClickListener(view -> ((MainActivity)getActivity()).getNavController().navigate(R.id.action_navigation_login_to_navigation_register));
         goRegister.setOnClickListener(view -> Navigation.findNavController(view).navigate(R.id.action_navigation_login_to_navigation_register));
-
         return root;
 
     }
-    private boolean saveToken(String token){
-        SharedPreferences sharedPreferences= getContext().getSharedPreferences("Data", Context.MODE_PRIVATE);
+
+    private boolean saveToken(String token) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Data", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("Token",token);
+        editor.putString("Token", token);
         return editor.commit();
     }
 }

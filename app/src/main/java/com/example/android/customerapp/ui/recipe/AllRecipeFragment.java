@@ -1,7 +1,6 @@
 package com.example.android.customerapp.ui.recipe;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.customerapp.MainActivity;
 import com.example.android.customerapp.R;
 import com.example.android.customerapp.adapters.OnRecipeListener;
 import com.example.android.customerapp.adapters.RecipeAdapter;
@@ -36,7 +32,10 @@ public class AllRecipeFragment extends Fragment implements OnRecipeListener {
     private Toolbar mToolbar;
     private List<Recipe> mRecipeList;
     private LodingDialog lodingDialog;
-    public AllRecipeFragment(){}
+
+    public AllRecipeFragment() {
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -55,15 +54,15 @@ public class AllRecipeFragment extends Fragment implements OnRecipeListener {
 
         mAllRecipeViewModel.getRecipeList();
         mAllRecipeViewModel.mRecipeList.observe(getViewLifecycleOwner(), recipeList -> {
-            mRecipeList=recipeList;
+            mRecipeList = recipeList;
             mAdapter.setRecipeList(recipeList);
         });
         initRecyclerView();
         return root;
     }
 
-    private void initRecyclerView(){
-        mAdapter = new RecipeAdapter(getContext(),this,mRecipeList);
+    private void initRecyclerView() {
+        mAdapter = new RecipeAdapter(getContext(), this, mRecipeList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         lodingDialog.dismiss();
@@ -72,9 +71,9 @@ public class AllRecipeFragment extends Fragment implements OnRecipeListener {
     @Override
     public void onRecipeClick(int position) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("recipe",mRecipeList.get(position));
-        ((MainActivity)getActivity()).onRecipeClick(bundle);
-//        Navigation.findNavController(getView()).navigate(R.id.action_navigation_all_recipe_to_navigation_recipe,bundle);
+        bundle.putSerializable("recipe", mRecipeList.get(position));
+//        ((MainActivity)getActivity()).onRecipeClick(bundle);
+        Navigation.findNavController(getView()).navigate(R.id.action_navigation_all_recipe_to_navigation_recipe, bundle);
     }
 
 }

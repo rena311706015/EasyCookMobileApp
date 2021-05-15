@@ -2,7 +2,6 @@ package com.example.android.customerapp.ui.account;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,11 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.android.customerapp.R;
-import com.example.android.customerapp.VideoPlayerActivity;
 import com.example.android.customerapp.viewmodels.AccountViewModel;
 
 public class AccountFragment extends Fragment {
@@ -35,35 +32,37 @@ public class AccountFragment extends Fragment {
 
         orderButton = root.findViewById(R.id.go_order);
         loginButton = root.findViewById(R.id.login);
-        logoutButton =  root.findViewById(R.id.logout);
+        logoutButton = root.findViewById(R.id.logout);
         welcomeText = root.findViewById(R.id.welcome_message);
 
-        if(readToken()==null){
+        if (readToken() == null) {
             loginButton.setVisibility(View.VISIBLE);
             orderButton.setVisibility(View.GONE);
             logoutButton.setVisibility(View.GONE);
             welcomeText.setText("請先登入");
-        }else{
+        } else {
             loginButton.setVisibility(View.GONE);
             orderButton.setVisibility(View.VISIBLE);
             logoutButton.setVisibility(View.VISIBLE);
             welcomeText.setText("歡迎回來!");
         }
 
-        orderButton.setOnClickListener(view ->{
+        orderButton.setOnClickListener(view -> {
+//            ((MainActivity)getActivity()).getNavController().navigate(R.id.action_navigation_account_to_navigation_all_order);
             Navigation.findNavController(view).navigate(R.id.action_navigation_account_to_navigation_all_order);
         });
 
-        loginButton.setOnClickListener(view ->{
+        loginButton.setOnClickListener(view -> {
+//            ((MainActivity)getActivity()).getNavController().navigate(R.id.action_navigation_account_to_navigation_login);
             Navigation.findNavController(view).navigate(R.id.action_navigation_account_to_navigation_login);
         });
 
-        logoutButton.setOnClickListener(view ->{
+        logoutButton.setOnClickListener(view -> {
             AlertDialog.Builder a = new AlertDialog.Builder(getContext());
             a.setTitle("確定要登出嗎?");
-
             a.setPositiveButton("確定", (dialog, num1) -> {
                 clearToken();
+//                ((MainActivity)getActivity()).getNavController().navigate(R.id.action_navigation_account_to_navigation_login);
                 Navigation.findNavController(view).navigate(R.id.action_navigation_account_to_navigation_login);
             });
             a.setNegativeButton("取消", (dialog, num1) -> {
@@ -74,12 +73,14 @@ public class AccountFragment extends Fragment {
 
         return root;
     }
-    private String readToken(){
+
+    private String readToken() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("Data", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("Token",null);
+        return sharedPreferences.getString("Token", null);
     }
-    private void clearToken(){
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Data",Context.MODE_PRIVATE);
+
+    private void clearToken() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("Data", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();

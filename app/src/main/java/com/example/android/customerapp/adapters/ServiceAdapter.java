@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.customerapp.R;
@@ -21,10 +22,11 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     public ImageView image2;
     public WebView webView;
 
-    public HashMap<Integer,String> chatListMap;
-    public ServiceAdapter(Context context, HashMap<Integer,String> map) {
+    public HashMap<Integer, String> chatListMap;
+
+    public ServiceAdapter(Context context, HashMap<Integer, String> map) {
         this.context = context;
-        this.chatListMap=map;
+        this.chatListMap = map;
     }
 
     @Override
@@ -37,23 +39,25 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     class ServiceViewHolder extends RecyclerView.ViewHolder {
         public ServiceViewHolder(View itemView) {
             super(itemView);
-            chatText=itemView.findViewById(R.id.chat_text);
-            image1=itemView.findViewById(R.id.chat_image);
-            image2=itemView.findViewById(R.id.chat_image2);
-            webView=itemView.findViewById(R.id.webview);
+            chatText = itemView.findViewById(R.id.chat_text);
+            image1 = itemView.findViewById(R.id.chat_image);
+            image2 = itemView.findViewById(R.id.chat_image2);
+            webView = itemView.findViewById(R.id.webview);
         }
 
     }
+
     @Override
-    public void onBindViewHolder(final ServiceViewHolder holder,final int position) {
-            if(position%2!=0){
-                image1.setVisibility(View.GONE);
-                image2.setVisibility(View.VISIBLE);
-            }
-            chatText.setText(chatListMap.get(position));
-            chatText.bringToFront();  //強制移到最上層
+    public void onBindViewHolder(final ServiceViewHolder holder, final int position) {
+        if (position % 2 != 0) {
+            image1.setVisibility(View.GONE);
+            image2.setVisibility(View.VISIBLE);
+        }
+        chatText.setText(chatListMap.get(position));
+        chatText.bringToFront();  //強制移到最上層
 
     }
+
     @Override
     public int getItemCount() {
         return chatListMap.size();

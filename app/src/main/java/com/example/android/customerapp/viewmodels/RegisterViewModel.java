@@ -24,11 +24,11 @@ public class RegisterViewModel extends ViewModel {
         BackendAPIClient.getInstance().memberRegister(member).enqueue(new Callback<Member>() {
             @Override
             public void onResponse(Call<Member> call, Response<Member> response) {
-                if(response.code()==200){
+                if (response.code() == 200) {
                     Log.e("Register", "Success " + response.body().id);
                     mMember.setValue(response.body());
-                }else{
-                    Log.e("Register","Failed " + response.code());
+                } else {
+                    Log.e("Register", "Failed " + response.code());
                 }
 
             }

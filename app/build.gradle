@@ -45,6 +45,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    //carouse
+
+    // Material Components for Android
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:1.3.0'
+    implementation 'me.relex:circleindicator:2.1.6'
+    //exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:2.13.3'
     //cardview
     implementation "androidx.cardview:cardview:1.0.0"
@@ -52,7 +58,7 @@ dependencies {
     implementation 'com.wang.avi:library:2.1.3'
     //navigation
     implementation 'androidx.navigation:navigation-fragment:2.3.3'
-    implementation 'androidx.navigation:navigation-ui:2.3.3'
+    implementation 'androidx.navigation:navigation-ui:2.3.5'
     //viewModel and liveData
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     //retrofit

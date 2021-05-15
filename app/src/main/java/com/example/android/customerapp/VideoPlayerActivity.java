@@ -4,12 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,10 +21,7 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
-import android.media.session.MediaController.TransportControls;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -37,17 +30,10 @@ import androidx.core.app.NotificationManagerCompat;
 import com.example.android.customerapp.models.LodingDialog;
 import com.example.android.customerapp.models.Recipe;
 import com.example.android.customerapp.models.RecipeStep;
-import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.Timeline;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.MimeTypes;
-import com.google.android.exoplayer2.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,18 +46,12 @@ public class VideoPlayerActivity extends AppCompatActivity {
     private TextView stepText, hintText;
     private ImageView speakImage;
     private ScaleAnimation animation;
-    //        private RecipeVideoView recipeVideoView;
-//        private VideoView recipeVideoView;
     /* exoplayer */
     private PlayerView recipeVideoView;
     private SimpleExoPlayer player;
     private boolean playWhenReady = true;
     private int currentWindow = 0;
     private long playbackPosition = 0;
-
-    private MediaController mMediaController;
-    private TransportControls mTransportControls;
-    private AudioManager mAudioManager;
 
     private Recipe mRecipe;
     private int index;  //目前在第幾步
@@ -157,7 +137,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
             private void getCurrentPlayerPosition() {
                 currentTime = player.getCurrentPosition() / 1000 * 1000;
 //                Log.e("TIME", "current pos: " + currentTime);
-                if (currentTime == stepList.get(index).getStartTime())
+                if (currentTime >= stepList.get(index).getStartTime())
                     player.pause();
                 if (player.isPlaying()) {
                     recipeVideoView.postDelayed(this::getCurrentPlayerPosition, 500);
@@ -283,6 +263,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
                 break;
             }
             Log.e("RECOGNIZER", sb.toString());
+            //TODO 計時要可以在背景計，然後繼續下一步
             if (stepList.get(index).getTimer() != 0 && sb.toString().equals("開始計時")) {
                 recognizer.cancel();
                 CountDownTimer timer = new CountDownTimer(stepList.get(index).getTimer(), 1000) {
@@ -302,8 +283,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
                 };
                 timer.start();
 
-            }
-            else if (sb.toString().equals("上一步")) {
+            } else if (sb.toString().equals("上一步")) {
                 index -= 1;
                 recognizer.cancel();
                 setGone();

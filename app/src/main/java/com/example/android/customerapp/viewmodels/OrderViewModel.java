@@ -7,11 +7,12 @@ import android.util.Log;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.android.customerapp.models.OrderItem;
 import com.example.android.customerapp.models.Recipe;
-import com.example.android.customerapp.requests.BackendAPIClient;
 import com.example.android.customerapp.requests.PhotoAPIClient;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -19,36 +20,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AllRecipeViewModel extends ViewModel {
+import static com.example.android.customerapp.BR.recipe;
 
-    public MediatorLiveData<List<Recipe>> mRecipeList;
+public class OrderViewModel extends ViewModel {
+    public MediatorLiveData<List<OrderItem>> orderItemList;
 
-    public AllRecipeViewModel() {
-        mRecipeList = new MediatorLiveData<>();
+    public OrderViewModel() {
+        orderItemList = new MediatorLiveData<>();
     }
-
-    public void getRecipeList() {
-        //enqueue ->會另外開執行緒，所以可以不用再另外用runnable
-        BackendAPIClient.getInstance().getAllRecipe().enqueue(new Callback<List<Recipe>>() {
-            @Override
-            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                mRecipeList.setValue(response.body());
-                getPhoto();
-            }
-
-            @Override
-            public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                Log.e("RECIPE", "FAIL");
-                Log.e("RECIPE", t.getMessage());
-            }
-        });
-    }
-
-    public void getPhoto() {
-        List<Recipe> recipeList = mRecipeList.getValue();
-        for (Recipe recipe : recipeList) {
-            if (recipe.getPhoto().contains("http")) {
-                String name = recipe.getPhoto().substring(recipe.getPhoto().lastIndexOf("/") + 1);
+    public void getPhoto(OrderItem[] orderItems) {
+        List<OrderItem> items = Arrays.asList(orderItems);
+        for (OrderItem item : orderItems) {
+            if (item.getRecipeImage().contains("http")) {
+                String name = item.getRecipeImage().substring(item.getRecipeImage().lastIndexOf("/") + 1);
                 PhotoAPIClient.getInstance().getPhoto(name).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -57,13 +41,12 @@ public class AllRecipeViewModel extends ViewModel {
                                 byte[] bytes;
                                 bytes = response.body().bytes();
                                 BitmapFactory.Options options = new BitmapFactory.Options();
-//                                options.inSampleSize = 2;
+                                options.inSampleSize = 4;
                                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
-
-                                Recipe recipeWithPhoto = recipe;
-                                recipeWithPhoto.setPhotoBitmap(bitmap);
-                                recipeList.set(recipeList.indexOf(recipe), recipeWithPhoto);
-                                mRecipeList.setValue(recipeList);
+                                OrderItem itemWithPhoto = item;
+                                item.setBitmap(bitmap);
+                                items.set(items.indexOf(item),itemWithPhoto);
+                                orderItemList.setValue(items);
                             }
 
                         } catch (IOException e) {
@@ -81,4 +64,5 @@ public class AllRecipeViewModel extends ViewModel {
         }
 
     }
+
 }

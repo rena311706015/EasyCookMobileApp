@@ -14,10 +14,10 @@ public class BindingAdapter extends MyBindingAdapter {
     }
 
     @Override
-    public void setImage(ImageView view, Bitmap value){
-        if(value!= null){
+    public void setImage(ImageView view, Bitmap value) {
+        if (value != null) {
             view.setImageBitmap(value);
-        }else{
+        } else {
             view.setImageResource(R.drawable.loding);
         }
     }

@@ -55,6 +55,9 @@
         android:name="com.example.android.customerapp.ui.account.OrderFragment"
         android:label="訂單"
         tools:layout="@layout/fragment_order" >
+        <action
+            android:id="@+id/action_navigation_order_to_navigation_recipe"
+            app:destination="@id/navigation_recipe" />
     </fragment>
     <fragment
         android:id="@+id/navigation_login"

@@ -30,9 +30,10 @@ public class RecipeIngredient implements Serializable {
     Ingredient ingredient;
     double quantityRequired;
     int id;
-    public RecipeIngredient(int id, Ingredient ingredient, double quantityRequired){
-        this.id=id;
-        this.ingredient=ingredient;
-        this.quantityRequired=quantityRequired;
+
+    public RecipeIngredient(int id, Ingredient ingredient, double quantityRequired) {
+        this.id = id;
+        this.ingredient = ingredient;
+        this.quantityRequired = quantityRequired;
     }
 }

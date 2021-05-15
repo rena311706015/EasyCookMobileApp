@@ -1,12 +1,16 @@
 package com.example.android.customerapp.models;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 public class OrderItem implements Serializable {
     int id, itemPrice;
     Recipe recipe;
     String recipeImage;
+    Bitmap bitmap;
     boolean isCustomize;
+
 
     public OrderItem(int id, int itemPrice, Recipe recipe, String recipeImage, boolean isCustomize) {
         this.id = id;
@@ -24,8 +28,8 @@ public class OrderItem implements Serializable {
         this.id = id;
     }
 
-    public int getItemPrice() {
-        return itemPrice;
+    public String getItemPrice() {
+        return "NT$"+itemPrice;
     }
 
     public void setItemPrice(int itemPrice) {
@@ -46,6 +50,14 @@ public class OrderItem implements Serializable {
 
     public void setRecipeImage(String recipeImage) {
         this.recipeImage = recipeImage;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
     public boolean isCustomize() {

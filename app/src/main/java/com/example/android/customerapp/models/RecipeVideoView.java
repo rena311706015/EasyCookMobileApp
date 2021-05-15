@@ -2,7 +2,6 @@ package com.example.android.customerapp.models;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
 import android.widget.VideoView;
 
 public class RecipeVideoView extends VideoView {
@@ -19,6 +18,7 @@ public class RecipeVideoView extends VideoView {
     public RecipeVideoView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+
     public void setPlayPauseListener(PlayPauseListener listener) {
         mListener = listener;
     }
@@ -42,6 +42,7 @@ public class RecipeVideoView extends VideoView {
 
     public interface PlayPauseListener {
         void onPlay();
+
         void onPause();
     }
 

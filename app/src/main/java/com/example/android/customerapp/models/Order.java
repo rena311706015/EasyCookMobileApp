@@ -1,19 +1,15 @@
 package com.example.android.customerapp.models;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 public class Order implements Serializable {
-    private int id, transportFee,discount,sum;
-    private List<OrderItem> orderItems;
+    private int id, transportFee, discount, sum;
+    private OrderItem[] orderItems;
     private Member member;
-    private String orderNumber,orderTime,payWay,serviceWay,hopeDeliverTime,realDeliverTime,shippingTime,status,address;
+    private String orderNumber, orderTime, payWay, serviceWay, hopeDeliverTime, realDeliverTime, shippingTime, status, address;
 
-    public Order(int id, int transportFee, int discount, int sum, List<OrderItem> orderItems, Member member, String orderNumber, String orderTime, String payWay, String serviceWay, String hopeDeliverTime, String realDeliverTime, String shippingTime, String status, String address) {
+    public Order(int id, int transportFee, int discount, int sum, OrderItem[] orderItems, Member member, String orderNumber, String orderTime, String payWay, String serviceWay, String hopeDeliverTime, String realDeliverTime, String shippingTime, String status, String address) {
         this.id = id;
         this.transportFee = transportFee;
         this.discount = discount;
@@ -48,7 +44,7 @@ public class Order implements Serializable {
     }
 
     public String getDiscount() {
-        return "-"+discount;
+        return "-" + discount;
     }
 
     public void setDiscount(int discount) {
@@ -63,13 +59,19 @@ public class Order implements Serializable {
         this.sum = sum;
     }
 
-    public int getSubTotal() { return sum+discount-transportFee; }
+    public String getSumText() {
+        return "NT$ " + sum;
+    }
 
-    public List<OrderItem> getOrderItems() {
+    public int getSubTotal() {
+        return sum + discount - transportFee;
+    }
+
+    public OrderItem[] getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
+    public void setOrderItems(OrderItem[] orderItems) {
         this.orderItems = orderItems;
     }
 
@@ -90,8 +92,8 @@ public class Order implements Serializable {
     }
 
     public String getOrderTime() {
-        orderTime = orderTime.replace("T"," ");
-        orderTime = orderTime.replace("Z","");
+        orderTime = orderTime.replace("T", " ");
+        orderTime = orderTime.replace("Z", "");
         return orderTime;
     }
 
@@ -140,6 +142,7 @@ public class Order implements Serializable {
     }
 
     public String getStatus() {
+        //TODO switch change english to chinese
         return status;
     }
 

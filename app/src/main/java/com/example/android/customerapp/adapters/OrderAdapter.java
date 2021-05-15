@@ -25,6 +25,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
         this.mOnOrderListener = mOnOrderListener;
         this.orderList = orders;
     }
+
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,13 +43,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderViewHolder> {
     }
 
 
-    public void setOrderList(List<Order> orders){
+    public void setOrderList(List<Order> orders) {
         orderList = orders;
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
-        if(orderList != null){
+        if (orderList != null) {
             return orderList.size();
         }
         return 0;

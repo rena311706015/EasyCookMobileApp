@@ -29,6 +29,7 @@ public class LodingDialog extends Dialog {
     protected LodingDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
+
     @Override
     public void show() {
         super.show();

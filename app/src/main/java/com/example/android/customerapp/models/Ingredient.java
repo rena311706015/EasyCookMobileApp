@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Ingredient implements Serializable {
 
-    String name,category,unit,country,city;
-    int id,price,safetyStock,stock;
+    String name, category, unit, country, city;
+    int id, price, safetyStock, stock;
     double kcal;
 
 

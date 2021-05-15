@@ -6,8 +6,8 @@ import java.util.concurrent.ScheduledExecutorService;
 public class AppExecutors {
     private static AppExecutors instance;
 
-    public static AppExecutors getInstance(){
-        if(instance == null){
+    public static AppExecutors getInstance() {
+        if (instance == null) {
             instance = new AppExecutors();
         }
         return instance;
@@ -15,7 +15,7 @@ public class AppExecutors {
 
     private final ScheduledExecutorService mNetworkIO = Executors.newScheduledThreadPool(3);
 
-    public ScheduledExecutorService networkIO(){
+    public ScheduledExecutorService networkIO() {
         return mNetworkIO;
     }
 }
