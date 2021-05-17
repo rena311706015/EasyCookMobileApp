@@ -9,10 +9,10 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/banner1"
+        android:src="@drawable/banner1_1"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH25"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -20,12 +20,12 @@
         android:id="@+id/userId"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="註冊 Register"
+        android:text="註冊"
         android:textSize="30sp"
         android:textColor="@color/white"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH25"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH35"
         app:layout_constraintStart_toStartOf="@id/guidelineV2"
         app:layout_constraintEnd_toEndOf="@id/guidelineV8"/>
     <TextView
@@ -36,8 +36,8 @@
         android:text="帳號"
         android:textSize="15sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guidelineH25"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH35"
+        app:layout_constraintTop_toTopOf="@id/guidelineH35"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/registerAccount"/>
     <EditText
@@ -46,8 +46,8 @@
         android:layout_height="0dp"
         android:textSize="15sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guidelineH25"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH35"
+        app:layout_constraintTop_toTopOf="@id/guidelineH35"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
         app:layout_constraintEnd_toEndOf="parent"/>
     <TextView
@@ -58,8 +58,8 @@
         android:text="密碼"
         android:textSize="15sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guidelineH35"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
+        app:layout_constraintTop_toTopOf="@id/guidelineH45"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/registerPassword"/>
     <EditText
@@ -69,8 +69,8 @@
         android:textSize="15sp"
         android:gravity="center"
         android:inputType="textPassword"
-        app:layout_constraintTop_toTopOf="@id/guidelineH35"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
+        app:layout_constraintTop_toTopOf="@id/guidelineH45"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH55"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
         app:layout_constraintEnd_toEndOf="parent"/>
     <TextView
@@ -81,8 +81,8 @@
         android:text="手機"
         android:textSize="15sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guidelineH45"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH55"
+        app:layout_constraintTop_toTopOf="@id/guidelineH55"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH65"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/registerPhone"/>
     <EditText
@@ -91,8 +91,8 @@
         android:layout_height="0dp"
         android:textSize="15sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guidelineH45"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH55"
+        app:layout_constraintTop_toTopOf="@id/guidelineH55"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH65"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
         app:layout_constraintEnd_toEndOf="parent"/>
     <TextView
@@ -103,8 +103,8 @@
         android:text="信箱"
         android:textSize="15sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guidelineH55"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH65"
+        app:layout_constraintTop_toTopOf="@id/guidelineH65"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/registerEmail"/>
     <EditText
@@ -113,8 +113,8 @@
         android:layout_height="0dp"
         android:textSize="15sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guidelineH55"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH65"
+        app:layout_constraintTop_toTopOf="@id/guidelineH65"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH75"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
         app:layout_constraintEnd_toEndOf="parent"/>
     <TextView
@@ -125,8 +125,8 @@
         android:text="名稱"
         android:textSize="15sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guidelineH65"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH75"
+        app:layout_constraintTop_toTopOf="@id/guidelineH75"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/registerName"/>
     <EditText
@@ -135,8 +135,8 @@
         android:layout_height="0dp"
         android:textSize="15sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guidelineH65"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH75"
+        app:layout_constraintTop_toTopOf="@id/guidelineH75"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH85"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
         app:layout_constraintEnd_toEndOf="parent"/>
     <Button
@@ -146,8 +146,8 @@
         android:text="註冊"
         android:textSize="15sp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="@id/guidelineH75"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH85"
+        app:layout_constraintTop_toTopOf="@id/guidelineH9"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH95"
         app:layout_constraintStart_toStartOf="@id/guidelineV2"
         app:layout_constraintEnd_toEndOf="@id/guidelineV8"/>
     <androidx.constraintlayout.widget.Guideline
@@ -204,4 +204,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.85"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

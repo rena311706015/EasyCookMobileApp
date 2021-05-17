@@ -6,8 +6,10 @@ import com.example.android.customerapp.models.Recipe;
 import com.example.android.customerapp.models.RecipeImage;
 import com.google.gson.JsonObject;
 
+import java.sql.Blob;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -34,5 +36,8 @@ public interface BackendAPI {
 
     @GET("recipe/images/all/{id}")
     Call<List<RecipeImage>> getAllImage(@Path("id") String id);
+
+    @GET("recipe/images/blob/{id}")
+    Call<ResponseBody> getImage(@Path("id") String id);
 }
 

@@ -6,6 +6,10 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,12 +31,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.android.customerapp.models.ExtendedTimeBar;
 import com.example.android.customerapp.models.LodingDialog;
 import com.example.android.customerapp.models.Recipe;
 import com.example.android.customerapp.models.RecipeStep;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.ui.DefaultTimeBar;
 import com.google.android.exoplayer2.ui.PlayerView;
 
 import java.util.ArrayList;
@@ -106,18 +112,20 @@ public class VideoPlayerActivity extends AppCompatActivity {
         player = new SimpleExoPlayer.Builder(this).build();
         recipeVideoView.setPlayer(player);
         MediaItem mediaItem = MediaItem.fromUri(uri);
+        ExtendedTimeBar timeBar = new ExtendedTimeBar(this);
+        timeBar.setEnabled(false);
         player.setMediaItem(mediaItem);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("LifeCycle", "onResume");
 
         player.addListener(new Player.EventListener() {
             @Override
             public void onIsPlayingChanged(boolean isPlaying) {
                 if (isPlaying) {
+                    speakImage.clearAnimation();
                     recipeVideoView.postDelayed(this::getCurrentPlayerPosition, 500);
                 } else {
                     Log.e("VIDEO", "OnPause");
@@ -136,7 +144,6 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
             private void getCurrentPlayerPosition() {
                 currentTime = player.getCurrentPosition() / 1000 * 1000;
-//                Log.e("TIME", "current pos: " + currentTime);
                 if (currentTime >= stepList.get(index).getStartTime())
                     player.pause();
                 if (player.isPlaying()) {
@@ -145,19 +152,16 @@ public class VideoPlayerActivity extends AppCompatActivity {
             }
         });
         player.setPlayWhenReady(playWhenReady);
-//        player.seekTo(currentWindow, playbackPosition);
         player.seekTo(currentWindow, playbackPosition);
         player.prepare();
         player.play();
         lodingDialog.dismiss();
-
-
     }
+
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.e("LifeCycle", "onPause");
         recognizer.stopListening();
         recognizer.cancel();
 //                setGone();
@@ -173,12 +177,10 @@ public class VideoPlayerActivity extends AppCompatActivity {
             player.release();
 //            player = null;
         }
-        Log.e("LifeCycle", "onStop");
     }
 
     @Override
     public void onDestroy() {
-        Log.e("LifeCycle", "onDestroy");
         super.onDestroy();
         if (recognizer != null) {
             recognizer.destroy();
@@ -217,6 +219,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
     }
 
     public void setVisible() {
+        speakImage.startAnimation(animation);
         speakImage.setVisibility(View.VISIBLE);
         stepText.setVisibility(View.VISIBLE);
         hintText.setVisibility(View.VISIBLE);
@@ -264,7 +267,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
             }
             Log.e("RECOGNIZER", sb.toString());
             //TODO 計時要可以在背景計，然後繼續下一步
-            if (stepList.get(index).getTimer() != 0 && sb.toString().equals("開始計時")) {
+            if (stepList.get(index).getTimer() != 0 && sb.toString().contains("開始計時")) {
                 recognizer.cancel();
                 CountDownTimer timer = new CountDownTimer(stepList.get(index).getTimer(), 1000) {
                     @Override
@@ -275,6 +278,8 @@ public class VideoPlayerActivity extends AppCompatActivity {
                     @Override
                     public void onFinish() {
                         Log.e("VIDEO", "onFinish");
+                        ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 500);
+                        toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 5000);
                         sendNotification();
                         stepText.setText("時間到");
                         hintText.setText("請說「下一步」以繼續導覽");
@@ -283,7 +288,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
                 };
                 timer.start();
 
-            } else if (sb.toString().equals("上一步")) {
+            } else if (sb.toString().contains("上一步")) {
                 index -= 1;
                 recognizer.cancel();
                 setGone();
@@ -294,12 +299,12 @@ public class VideoPlayerActivity extends AppCompatActivity {
                 }
                 currentTime = stepList.get(index).getStartTime();
                 handler.postDelayed(() -> player.play(), 500);
-            } else if (sb.toString().equals("下一步")) {
+            } else if (sb.toString().contains("下一步")) {
                 index += 1;
                 recognizer.cancel();
                 setGone();
                 handler.postDelayed(() -> player.play(), 500);
-            } else if (sb.toString().equals("重播")) {
+            } else if (sb.toString().contains("重播")) {
                 recognizer.cancel();
                 setGone();
                 player.seekTo(stepList.get(index - 1).getStartTime());
@@ -337,7 +342,6 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
         @Override
         public void onBeginningOfSpeech() {
-            speakImage.startAnimation(animation);
         }
 
         @Override
@@ -351,7 +355,6 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
         @Override
         public void onEndOfSpeech() {
-            speakImage.clearAnimation();
             recognizer.cancel();
             recognizer.startListening(intent);
         }

@@ -2,7 +2,10 @@ package com.example.android.customerapp.ui.home;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Gravity;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,13 +32,14 @@ import com.example.android.customerapp.viewmodels.HomeViewModel;
 import org.imaginativeworld.whynotimagecarousel.CarouselItem;
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class HomeFragment extends Fragment {
     private HomeViewModel mHomeViewModel;
-    private TextView toVideoPlayer;
+    private ImageView iconVideo, iconVegan, iconFb, iconIg;
     private List<Recipe> mRecipeList;
     private LodingDialog lodingDialog;
     private ImageCarousel carousel;
@@ -43,17 +48,31 @@ public class HomeFragment extends Fragment {
         mHomeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         carousel = root.findViewById(R.id.carousel);
-        toVideoPlayer = root.findViewById(R.id.function1);
+        iconVideo = root.findViewById(R.id.icon_video);
+        iconVegan = root.findViewById(R.id.icon_vegan);
+        iconFb = root.findViewById(R.id.icon_fb);
+        iconIg = root.findViewById(R.id.icon_ig);
         mRecipeList = new ArrayList<>();
         lodingDialog = new LodingDialog(getContext());
-
         List<CarouselItem> list = new ArrayList<>();
         list.add(new CarouselItem(R.drawable.banner1));
         list.add(new CarouselItem(R.drawable.banner2));
         list.add(new CarouselItem(R.drawable.banner3));
         carousel.addData(list);
-
-        toVideoPlayer.setOnClickListener(v -> {
+        iconVegan.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "尚未啟用", Toast.LENGTH_SHORT).show();
+        });
+        iconFb.setOnClickListener(v -> {
+            Uri uri = Uri.parse("https://www.facebook.com/tsohuecook");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        });
+        iconIg.setOnClickListener(v -> {
+            Uri uri = Uri.parse("https://www.instagram.com/tsohue_cook/");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        });
+        iconVideo.setOnClickListener(v -> {
             lodingDialog.show();
             mHomeViewModel.getRecipeList();
             mHomeViewModel.mRecipeList.observe(getViewLifecycleOwner(), recipeList -> {

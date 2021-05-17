@@ -59,12 +59,8 @@ public class Order implements Serializable {
         this.sum = sum;
     }
 
-    public String getSumText() {
-        return "NT$ " + sum;
-    }
-
-    public int getSubTotal() {
-        return sum + discount - transportFee;
+    public String getTotal() {
+        return "NT$ " + (sum + transportFee - discount);
     }
 
     public OrderItem[] getOrderItems() {
@@ -102,7 +98,18 @@ public class Order implements Serializable {
     }
 
     public String getPayWay() {
-        return payWay;
+        switch (payWay){
+            case "cashOnDelivery":
+                return "貨到付款";
+            case "transfer":
+                return "銀行轉帳";
+            case "creditcard":
+                return "信用卡";
+            case "payOnline":
+                return "電子支付";
+        }
+
+        return "其他";
     }
 
     public void setPayWay(String payWay) {
@@ -110,7 +117,15 @@ public class Order implements Serializable {
     }
 
     public String getServiceWay() {
-        return serviceWay;
+        switch (serviceWay){
+            case "homeDelivery":
+                return "宅配";
+            case "family":
+                return "全家";
+            case "seven":
+                return "7-11";
+        }
+        return "其他";
     }
 
     public void setServiceWay(String serviceWay) {
@@ -142,8 +157,17 @@ public class Order implements Serializable {
     }
 
     public String getStatus() {
-        //TODO switch change english to chinese
-        return status;
+        switch(status){
+            case "toConfirm":
+                return "待確認";
+            case "toDeliver":
+                return "待配送";
+            case "finish":
+                return "已完成";
+            case "canceled":
+                return "已取消";
+        }
+        return "待確認";
     }
 
     public void setStatus(String status) {

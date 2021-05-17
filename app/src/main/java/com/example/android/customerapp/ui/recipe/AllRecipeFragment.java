@@ -1,6 +1,9 @@
 package com.example.android.customerapp.ui.recipe;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +32,8 @@ public class AllRecipeFragment extends Fragment implements OnRecipeListener {
     private RecipeAdapter mAdapter;
     private AllRecipeViewModel mAllRecipeViewModel;
     private RecyclerView mRecyclerView;
-    private Toolbar mToolbar;
     private List<Recipe> mRecipeList;
     private LodingDialog lodingDialog;
-
-    public AllRecipeFragment() {
-    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,21 +41,19 @@ public class AllRecipeFragment extends Fragment implements OnRecipeListener {
         mAllRecipeViewModel = ViewModelProviders.of(this).get(AllRecipeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_all_recipe, container, false);
         mRecyclerView = root.findViewById(R.id.recyclerview_recipes);
-
-        mToolbar = root.findViewById(R.id.toolbar);
-        mToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_baseline_arrow_back_24, null));
-        mToolbar.inflateMenu(R.menu.search_menu);
-
         mRecipeList = new ArrayList<>();
 
         lodingDialog = new LodingDialog(getContext());
         lodingDialog.show();
-
+        //TODO 圖片還沒載入時要顯示動畫
         mAllRecipeViewModel.getRecipeList();
         mAllRecipeViewModel.mRecipeList.observe(getViewLifecycleOwner(), recipeList -> {
+            lodingDialog.dismiss();
+            Log.e("RecipeList","Observe");
             mRecipeList = recipeList;
-            mAdapter.setRecipeList(recipeList);
+            mAdapter.setRecipeList(mRecipeList);
         });
+
         initRecyclerView();
         return root;
     }
@@ -65,14 +62,12 @@ public class AllRecipeFragment extends Fragment implements OnRecipeListener {
         mAdapter = new RecipeAdapter(getContext(), this, mRecipeList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        lodingDialog.dismiss();
     }
 
     @Override
     public void onRecipeClick(int position) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("recipe", mRecipeList.get(position));
-//        ((MainActivity)getActivity()).onRecipeClick(bundle);
         Navigation.findNavController(getView()).navigate(R.id.action_navigation_all_recipe_to_navigation_recipe, bundle);
     }
 

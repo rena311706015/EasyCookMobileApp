@@ -49,7 +49,7 @@ public class OrderFragment extends Fragment implements OnRecipeListener {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mOrderViewModel.getPhoto(mOrderItems);
-        mOrderViewModel.orderItemList.observe(getViewLifecycleOwner(), orderItemList -> {
+        mOrderViewModel.mOrderItemList.observe(getViewLifecycleOwner(), orderItemList -> {
             orderItemList.toArray(mOrderItems);
             mAdapter.setOrderItems(mOrderItems);
         });

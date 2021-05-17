@@ -17,6 +17,8 @@ import com.example.android.customerapp.R;
 import com.example.android.customerapp.models.Member;
 import com.example.android.customerapp.viewmodels.RegisterViewModel;
 
+import java.security.NoSuchAlgorithmException;
+
 public class RegisterFragment extends Fragment {
 
     private RegisterViewModel registerViewModel;
@@ -37,13 +39,12 @@ public class RegisterFragment extends Fragment {
 
         registerButton.setOnClickListener(view -> {
             final Member member = new Member(account.getText().toString(), password.getText().toString(), phone.getText().toString(), email.getText().toString(), username.getText().toString());
-            registerViewModel.memberRegister(member);
+            try {
+                registerViewModel.memberRegister(member);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
             registerViewModel.mMember.observe(getViewLifecycleOwner(), member1 -> {
-                Toast toast = new Toast(getContext());
-                toast.setText("註冊成功");
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.show();
-//                Toast.makeText(getContext(),"註冊成功",Toast.LENGTH_LONG);
                 Navigation.findNavController(view).navigate(R.id.action_navigation_register_to_navigation_login);
             });
         });

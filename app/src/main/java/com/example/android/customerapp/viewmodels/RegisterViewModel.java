@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModel;
 import com.example.android.customerapp.models.Member;
 import com.example.android.customerapp.requests.BackendAPIClient;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,7 +23,8 @@ public class RegisterViewModel extends ViewModel {
         mMember = new MediatorLiveData<>();
     }
 
-    public void memberRegister(Member member) {
+    public void memberRegister(Member member) throws NoSuchAlgorithmException {
+        member.setPassword(toSHA(member.getPassword()));
         BackendAPIClient.getInstance().memberRegister(member).enqueue(new Callback<Member>() {
             @Override
             public void onResponse(Call<Member> call, Response<Member> response) {
@@ -38,5 +42,18 @@ public class RegisterViewModel extends ViewModel {
                 Log.e("API", "FAIL");
             }
         });
+    }
+    private String toSHA(String pwd) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(pwd.getBytes());
+
+        byte byteData[] = md.digest();
+
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
+        return sb.toString();
     }
 }

@@ -37,10 +37,10 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
-                    Log.e("Login", response.body().get("token").getAsString());
                     token.setValue(response.body().get("token").getAsString());
                 } else {
                     Log.e("Login", "Fail " + response.message());
+                    token.setValue("fail");
                 }
             }
 
@@ -61,7 +61,6 @@ public class LoginViewModel extends ViewModel {
             sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
         }
 
-        System.out.println("Hex format : " + sb.toString());
         return sb.toString();
     }
 

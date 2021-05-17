@@ -1,32 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:layout_height="wrap_content"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="5dp"
     android:layout_width="match_parent"
+    android:layout_height="80dp"
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
     <ImageView
         android:id="@+id/order_item_photo"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:src="@drawable/banner2"
-        android:scaleType="fitCenter"
+        android:src="@drawable/loding"
+        android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guidelineV25"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
+        android:id="@+id/order_item_is_customize"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginVertical="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="客製"
+        android:textColor="@color/colorSecond"
+        android:textSize="15sp"
+        android:gravity="left"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="3dp"
+        android:background="@drawable/textview_shape_yellow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guidelineV25"
+        app:layout_constraintEnd_toStartOf="@id/order_item_version"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5" />
+    <TextView
+        android:id="@+id/order_item_version"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:text="低脂版本"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15sp"
+        android:gravity="left"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/order_item_is_customize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5" />
+
+    <TextView
         android:id="@+id/order_item_name"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_margin="10dp"
-        android:text="珍珠奶茶鬆餅"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="15sp"
         android:gravity="left"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="海鮮泰式涼麵"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH5"
         app:layout_constraintStart_toEndOf="@id/guidelineV25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
@@ -41,7 +72,7 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="15sp"
         android:gravity="right"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH5"
         app:layout_constraintStart_toEndOf="@id/guidelineV25"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
@@ -51,5 +82,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.25"/>
-
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

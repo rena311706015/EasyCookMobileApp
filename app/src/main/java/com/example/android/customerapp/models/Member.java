@@ -1,6 +1,8 @@
 package com.example.android.customerapp.models;
 
-public class Member {
+import java.io.Serializable;
+
+public class Member implements Serializable {
     public Member(String account, String password, String phone, String email, String username, String role) {
         this.account = account;
         this.password = password;

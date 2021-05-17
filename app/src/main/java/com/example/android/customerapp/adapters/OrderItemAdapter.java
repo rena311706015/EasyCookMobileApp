@@ -1,6 +1,7 @@
 package com.example.android.customerapp.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,13 +40,33 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull OrderItemViewHolder holder, int position) {
-        Log.e("ORDER","onBindViewHolder");
         OrderItem orderItem = orderItems[position];
         holder.name.setText(orderItem.getRecipe().getName());
         holder.price.setText(orderItem.getItemPrice());
+        holder.version.setText(orderItem.getRecipe().getVersion());
+        switch(orderItem.getRecipe().getVersion()){
+            case "正常版本":
+                holder.version.setTextColor(Color.parseColor("#99876F"));
+                break;
+            case "低脂版本":
+                holder.version.setTextColor(Color.parseColor("#8093B5"));
+                break;
+            case "素食版本":
+                holder.version.setTextColor(Color.parseColor("#7CA390"));
+                break;
+            case "肉多版本":
+                holder.version.setTextColor(Color.parseColor("#F09797"));
+                break;
+        }
         if(orderItem.getBitmap()!=null){
             holder.photo.setImageBitmap(orderItem.getBitmap());
         }
+        if(orderItem.isCustomize()==true){
+            holder.isCustomize.setVisibility(View.VISIBLE);
+        }else{
+            holder.isCustomize.setVisibility(View.GONE);
+        }
+
     }
 
     public void setOrderItems(OrderItem[] orderItems) {

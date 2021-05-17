@@ -8,63 +8,131 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/background"
+        android:src="@drawable/banner1_1"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH25"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
     <TextView
         android:id="@+id/welcome_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="請先登入"
         android:textSize="30sp"
         android:textColor="@color/white"
+        android:text="歡迎回來"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH25"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <TextView
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="登入"
-        android:textSize="30sp"
-        android:background="@color/white"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="@id/guidelineH25"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH35"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:background="@drawable/textview_shape_white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-    <Button
-        android:id="@+id/go_order"
+    <ImageView
+        android:id="@+id/btn_order"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="查看訂單"
-        android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="@id/guidelineH25"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH35"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    <Button
-        android:id="@+id/logout"
+        android:gravity="center"
+        android:background="@drawable/truck"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH47"
+        app:layout_constraintEnd_toStartOf="@id/btn_coupon"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/btn_order_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="訂單總覽"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH47"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
+        app:layout_constraintEnd_toStartOf="@id/btn_coupon"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <ImageView
+        android:id="@+id/btn_coupon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/coupon"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH47"
+        app:layout_constraintEnd_toStartOf="@id/btn_info"
+        app:layout_constraintStart_toEndOf="@id/btn_order"/>
+
+    <TextView
+        android:id="@+id/btn_coupon_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="折價券"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH47"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
+        app:layout_constraintEnd_toStartOf="@id/btn_info"
+        app:layout_constraintStart_toEndOf="@id/btn_order"/>
+
+    <ImageView
+        android:id="@+id/btn_info"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/information"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH47"
+        app:layout_constraintEnd_toStartOf="@id/btn_logout"
+        app:layout_constraintStart_toEndOf="@id/btn_coupon"/>
+
+    <TextView
+        android:id="@+id/btn_info_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="關於我們"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH47"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
+        app:layout_constraintEnd_toStartOf="@id/btn_logout"
+        app:layout_constraintStart_toEndOf="@id/btn_coupon"/>
+
+    <ImageView
+        android:id="@+id/btn_logout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/exit"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH47"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_info"/>
+
+
+    <TextView
+        android:id="@+id/btn_logout_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="登出"
-        android:textSize="18sp"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="@id/guidelineH35"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25"/>
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH47"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_info"/>
+
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH35"
         android:layout_width="wrap_content"
@@ -72,10 +140,22 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.35"/>
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH45"
+        android:id="@+id/guidelineH4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45"/>
+        app:layout_constraintGuide_percent="0.4"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.47"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

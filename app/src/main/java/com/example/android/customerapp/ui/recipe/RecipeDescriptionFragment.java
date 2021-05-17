@@ -1,5 +1,6 @@
 package com.example.android.customerapp.ui.recipe;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,21 @@ public class RecipeDescriptionFragment extends Fragment {
         mIngredientRecyclerView.setAdapter(mIngredientAdapter);
         mIngredientRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.setRecipe(mRecipe);
+        switch(binding.getRecipe().getVersion()){
+            case "正常版本":
+                binding.recipeVersion.setTextColor(Color.parseColor("#99876F"));
+                break;
+            case "低脂版本":
+                binding.recipeVersion.setTextColor(Color.parseColor("#8093B5"));
+                break;
+            case "素食版本":
+                binding.recipeVersion.setTextColor(Color.parseColor("#7CA390"));
+                break;
+            case "肉多版本":
+                binding.recipeVersion.setTextColor(Color.parseColor("#F09797"));
+                break;
+        }
+
 
         mRecipeViewModel.getAllPhoto(String.valueOf(mRecipe.getId()));
         List<CarouselItem> list = new ArrayList<>();

@@ -6,8 +6,10 @@ import com.example.android.customerapp.models.Recipe;
 import com.example.android.customerapp.models.RecipeImage;
 import com.google.gson.JsonObject;
 
+import java.sql.Blob;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -59,6 +61,8 @@ public class BackendAPIClient {
     public Call<List<RecipeImage>> getAllImage(String id) {
         return backendAPI.getAllImage(id);
     }
+
+    public Call<ResponseBody> getImage(String id){ return backendAPI.getImage(id);}
 }
 
 

@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.android.customerapp.models.Recipe;
 import com.example.android.customerapp.requests.BackendAPIClient;
-import com.example.android.customerapp.requests.PhotoAPIClient;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,9 +21,11 @@ import retrofit2.Response;
 public class AllRecipeViewModel extends ViewModel {
 
     public MediatorLiveData<List<Recipe>> mRecipeList;
+    public MediatorLiveData<byte[]> mByte;
 
     public AllRecipeViewModel() {
         mRecipeList = new MediatorLiveData<>();
+        mByte = new MediatorLiveData<>();
     }
 
     public void getRecipeList() {
@@ -47,21 +48,18 @@ public class AllRecipeViewModel extends ViewModel {
     public void getPhoto() {
         List<Recipe> recipeList = mRecipeList.getValue();
         for (Recipe recipe : recipeList) {
-            if (recipe.getPhoto().contains("http")) {
-                String name = recipe.getPhoto().substring(recipe.getPhoto().lastIndexOf("/") + 1);
-                PhotoAPIClient.getInstance().getPhoto(name).enqueue(new Callback<ResponseBody>() {
+            if (recipe.getBlobId() != "No Image") {
+                BackendAPIClient.getInstance().getImage(recipe.getBlobId()).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         try {
                             if (response.body() != null) {
+
                                 byte[] bytes;
                                 bytes = response.body().bytes();
-                                BitmapFactory.Options options = new BitmapFactory.Options();
-//                                options.inSampleSize = 2;
-                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
-
+                                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                                 Recipe recipeWithPhoto = recipe;
-                                recipeWithPhoto.setPhotoBitmap(bitmap);
+                                recipeWithPhoto.setPhotoBitmap(bmp);
                                 recipeList.set(recipeList.indexOf(recipe), recipeWithPhoto);
                                 mRecipeList.setValue(recipeList);
                             }
@@ -73,12 +71,12 @@ public class AllRecipeViewModel extends ViewModel {
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.e("PHOTO", t.getMessage());
+                        Log.e("API", t.getMessage());
                     }
                 });
             }
 
         }
-
     }
+
 }

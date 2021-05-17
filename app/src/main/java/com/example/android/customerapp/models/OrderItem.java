@@ -8,7 +8,7 @@ public class OrderItem implements Serializable {
     int id, itemPrice;
     Recipe recipe;
     String recipeImage;
-    Bitmap bitmap;
+    transient Bitmap bitmap;
     boolean isCustomize;
 
 
@@ -29,7 +29,7 @@ public class OrderItem implements Serializable {
     }
 
     public String getItemPrice() {
-        return "NT$"+itemPrice;
+        return "NT$ "+itemPrice;
     }
 
     public void setItemPrice(int itemPrice) {

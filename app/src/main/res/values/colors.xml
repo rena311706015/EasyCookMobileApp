@@ -6,4 +6,7 @@
     <color name="colorSecond">#F9BD23</color>
     <color name="colorBackground">#F3F0ED</color>
     <color name="white">#FFFFFF</color>
+    <color name="blue">#8093b5</color>
+    <color name="green">#7ca390</color>
+    <color name="red">#f09797</color>
 </resources>

@@ -1,6 +1,10 @@
 package com.example.android.customerapp.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -35,10 +39,25 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeViewHolder> {
         return new RecipeViewHolder(binding, mOnRecipeListener);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         LayoutRecipeListItemBinding binding = DataBindingUtil.getBinding(holder.itemView);
         binding.setRecipe(recipeList.get(position));
+        switch(binding.getRecipe().getVersion()){
+            case "正常版本":
+                binding.gridRecipeVersion.setTextColor(Color.parseColor("#99876F"));
+                break;
+            case "低脂版本":
+                binding.gridRecipeVersion.setTextColor(Color.parseColor("#8093B5"));
+                break;
+            case "素食版本":
+                binding.gridRecipeVersion.setTextColor(Color.parseColor("#7CA390"));
+                break;
+            case "肉多版本":
+                binding.gridRecipeVersion.setTextColor(Color.parseColor("#F09797"));
+                break;
+        }
         binding.executePendingBindings();
     }
 

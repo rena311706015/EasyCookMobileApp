@@ -6,35 +6,133 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
+
     <org.imaginativeworld.whynotimagecarousel.ImageCarousel
         android:id="@+id/carousel"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:showTopShadow="false"
+        app:showBottomShadow="false"
+        app:showNavigationButtons="false"
+        app:autoPlay="true"
         app:layout_constraintBottom_toTopOf="@id/guidelineH35"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-    <TextView
-        android:id="@+id/function1"
+
+    <ImageView
+        android:id="@+id/icon_video"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="廚"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
         android:gravity="center"
-        android:background="@drawable/icon_background"
+        android:background="@drawable/video"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH35"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH4"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH47"
+        app:layout_constraintEnd_toStartOf="@id/icon_vegan"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="影音導覽"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH47"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
+        app:layout_constraintEnd_toStartOf="@id/icon_vegan"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <ImageView
+        android:id="@+id/icon_vegan"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/vegan"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH47"
+        app:layout_constraintEnd_toStartOf="@id/icon_fb"
+        app:layout_constraintStart_toEndOf="@id/icon_video"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="素食專區"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH47"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
+        app:layout_constraintEnd_toStartOf="@id/icon_fb"
+        app:layout_constraintStart_toEndOf="@id/icon_video"/>
+
+    <ImageView
+        android:id="@+id/icon_fb"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/facebook"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH47"
+        app:layout_constraintEnd_toStartOf="@id/icon_ig"
+        app:layout_constraintStart_toEndOf="@id/icon_vegan"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="FB專頁"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH47"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
+        app:layout_constraintEnd_toStartOf="@id/icon_ig"
+        app:layout_constraintStart_toEndOf="@id/icon_vegan"/>
+
+    <ImageView
+        android:id="@+id/icon_ig"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/instagram"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH4"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH47"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_fb"/>
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="IG專頁"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH47"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_fb"/>
+
+
+    <ImageView
+        android:id="@+id/home_monthly_special"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/monthly_special"
+        app:layout_constraintBottom_toTopOf="@id/home_vip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineH5"/>
+
+    <ImageView
+        android:id="@+id/home_vip"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/vip"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_monthly_special"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH35"
         android:layout_width="wrap_content"
@@ -47,4 +145,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.47"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
