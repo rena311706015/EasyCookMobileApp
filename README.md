@@ -1,4 +1,4 @@
-# 專題APP 語音料理助手操作說明
+# 專題APP 語音料理助手操作畫面
 
 <div>
   <img width="270" height="480" alt="首頁" src="https://i.imgur.com/mv2ivHJ.jpg"/>
