@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import java.io.Serializable;
 
 public class Recipe implements Serializable {
-    private  transient Bitmap photoBitmap;
+    private transient Bitmap photoBitmap;
     private int id, likesCount, price;
     private String name, photo, link, description, version;
     private RecipeStep[] recipeSteps;
@@ -18,10 +18,10 @@ public class Recipe implements Serializable {
     public Recipe() {
     }
 
-    public Recipe(int id, String link, RecipeStep[] recipeSteps){
+    public Recipe(int id, String link, RecipeStep[] recipeSteps) {
         this.id = id;
         this.link = link;
-        this.recipeSteps=recipeSteps;
+        this.recipeSteps = recipeSteps;
     }
 
     public Recipe(Bitmap photoBitmap, int id, int likesCount, int price, String name, String photo, String link, String description, String version, RecipeStep[] recipeSteps, RecipeIngredient[] recipeIngredients, String blobId, String recipeImage) {
@@ -73,7 +73,7 @@ public class Recipe implements Serializable {
     }
 
     public String getPrice() {
-        return "NT$ "+ price;
+        return "NT$ " + price;
     }
 
     public void setPrice(int price) {

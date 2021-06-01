@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.customerapp.MainActivity;
 import com.example.android.customerapp.R;
 import com.example.android.customerapp.VideoPlayerActivity;
 import com.example.android.customerapp.adapters.OnStepListener;
@@ -57,22 +56,12 @@ public class RecipeVideoFragment extends Fragment implements OnStepListener {
         recipeVideoView = root.findViewById(R.id.recipe_video);
         videoButton = root.findViewById(R.id.video_button);
         mStepRecyclerView = root.findViewById(R.id.recipe_steps_list);
-
-        steps = new ArrayList<>();
-
         videoButton.setOnClickListener(v -> {
             goVideoPlayer();
         });
-//        RecipeStep[] stepArray = mRecipe.getRecipeSteps();
-//        List list = Arrays.asList(stepArray);
-//        steps = new ArrayList(list);
-////        for(RecipeStep step : mRecipe.getRecipeSteps()){
-////            if(step.getTimer()!=0)steps.remove(step);
-////        }
-////        for(int i=0;i<steps.size()-1;i++){
-////            steps.get(i).setNote(steps.get(i+1).getNote());
-////        }
-        //TODO step跑掉了
+        RecipeStep[] stepArray = mRecipe.getRecipeSteps();
+        List list = Arrays.asList(stepArray);
+        steps = new ArrayList(list);
         mStepAdapter = new StepAdapter(getContext(), this, mRecipe.getRecipeSteps());
         mStepRecyclerView.setAdapter(mStepAdapter);
         mStepRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -80,12 +69,11 @@ public class RecipeVideoFragment extends Fragment implements OnStepListener {
         return root;
     }
 
-    public void goVideoPlayer(){
-        Log.e("Button", "onClick");
+    public void goVideoPlayer() {
         Intent intent = new Intent();
         intent.setClass(getContext(), VideoPlayerActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("recipe", new Recipe(mRecipe.getId(),mRecipe.getLink(),mRecipe.getRecipeSteps()));
+        bundle.putSerializable("recipe", new Recipe(mRecipe.getId(), mRecipe.getLink(), mRecipe.getRecipeSteps()));
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -124,10 +112,14 @@ public class RecipeVideoFragment extends Fragment implements OnStepListener {
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
-        player.release();
+        if (player != null) {
+            player.release();
+            player = null;
+        }
     }
+
     @Override
     public void onStepClick(int position) {
         player.seekTo(currentWindow, steps.get(position).getStartTime());

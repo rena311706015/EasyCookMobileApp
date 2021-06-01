@@ -8,9 +8,7 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.android.customerapp.models.OrderItem;
-import com.example.android.customerapp.models.Recipe;
 import com.example.android.customerapp.requests.BackendAPIClient;
-import com.example.android.customerapp.requests.PhotoAPIClient;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -21,17 +19,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.android.customerapp.BR.recipe;
-
 public class OrderViewModel extends ViewModel {
     public MediatorLiveData<List<OrderItem>> mOrderItemList;
 
     public OrderViewModel() {
         mOrderItemList = new MediatorLiveData<>();
     }
+
     public void getPhoto(OrderItem[] orderItems) {
         List<OrderItem> orderItemList = Arrays.asList(orderItems);
-        for (OrderItem item: orderItemList) {
+        for (OrderItem item : orderItemList) {
             if (item.getRecipe().getRecipeImage() != "No Image" && item.getRecipe().getRecipeImage() != null) {
                 BackendAPIClient.getInstance().getImage(item.getRecipe().getRecipeImage()).enqueue(new Callback<ResponseBody>() {
                     @Override

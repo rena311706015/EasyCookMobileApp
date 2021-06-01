@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.customerapp.R;
 import com.example.android.customerapp.models.RecipeStep;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class StepAdapter extends RecyclerView.Adapter<StepViewHolder> {

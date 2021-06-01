@@ -1,7 +1,6 @@
 package com.example.android.customerapp.ui.account;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +21,6 @@ import com.example.android.customerapp.adapters.OrderItemAdapter;
 import com.example.android.customerapp.databinding.FragmentOrderBinding;
 import com.example.android.customerapp.models.Order;
 import com.example.android.customerapp.models.OrderItem;
-import com.example.android.customerapp.viewmodels.AllOrderViewModel;
-import com.example.android.customerapp.viewmodels.AllRecipeViewModel;
 import com.example.android.customerapp.viewmodels.OrderViewModel;
 
 public class OrderFragment extends Fragment implements OnRecipeListener {
@@ -58,6 +55,7 @@ public class OrderFragment extends Fragment implements OnRecipeListener {
 
         return root;
     }
+
     @Override
     public void onRecipeClick(int position) {
         Bundle bundle = new Bundle();

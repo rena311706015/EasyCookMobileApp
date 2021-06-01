@@ -1,7 +1,5 @@
 package com.example.android.customerapp.ui.recipe;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +8,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
@@ -49,7 +46,6 @@ public class AllRecipeFragment extends Fragment implements OnRecipeListener {
         mAllRecipeViewModel.getRecipeList();
         mAllRecipeViewModel.mRecipeList.observe(getViewLifecycleOwner(), recipeList -> {
             lodingDialog.dismiss();
-            Log.e("RecipeList","Observe");
             mRecipeList = recipeList;
             mAdapter.setRecipeList(mRecipeList);
         });

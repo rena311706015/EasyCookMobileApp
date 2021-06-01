@@ -4,12 +4,6 @@
     android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<!--    <android.support.design.widget.NavigationView-->
-<!--        android:id="@ id/nav_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_gravity="start"-->
-<!--        android:visibility="gone"/>-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.customerapp.R;
 
 
-public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public TextView stepId, stepTime, stepDescription;
     public OnStepListener onStepListener;
 

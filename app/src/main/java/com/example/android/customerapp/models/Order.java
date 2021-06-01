@@ -1,7 +1,6 @@
 package com.example.android.customerapp.models;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Order implements Serializable {
     private int id, transportFee, discount, sum;
@@ -98,7 +97,7 @@ public class Order implements Serializable {
     }
 
     public String getPayWay() {
-        switch (payWay){
+        switch (payWay) {
             case "cashOnDelivery":
                 return "貨到付款";
             case "transfer":
@@ -117,7 +116,7 @@ public class Order implements Serializable {
     }
 
     public String getServiceWay() {
-        switch (serviceWay){
+        switch (serviceWay) {
             case "homeDelivery":
                 return "宅配";
             case "family":
@@ -157,7 +156,7 @@ public class Order implements Serializable {
     }
 
     public String getStatus() {
-        switch(status){
+        switch (status) {
             case "toConfirm":
                 return "待確認";
             case "toDeliver":

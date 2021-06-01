@@ -7,6 +7,7 @@
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <ImageView
         android:id="@+id/chat_image"
         android:layout_width="wrap_content"
@@ -16,7 +17,8 @@
         app:layout_constraintTop_toTopOf="@id/rectangle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rectangle"
-        app:layout_constraintBottom_toBottomOf="@id/rectangle"/>
+        app:layout_constraintBottom_toBottomOf="@id/rectangle" />
+
     <TextView
         android:id="@+id/chat_text"
         android:layout_width="0dp"
@@ -26,7 +28,8 @@
         app:layout_constraintTop_toTopOf="@id/rectangle"
         app:layout_constraintStart_toStartOf="@id/rectangle"
         app:layout_constraintEnd_toEndOf="@id/rectangle"
-        app:layout_constraintBottom_toBottomOf="@id/rectangle"/>
+        app:layout_constraintBottom_toBottomOf="@id/rectangle" />
+
     <ImageView
         android:id="@+id/rectangle"
         android:layout_width="0dp"
@@ -37,7 +40,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/chat_image"
         app:layout_constraintEnd_toStartOf="@id/chat_image2"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <WebView
         android:id="@+id/webview"
         android:layout_width="0dp"
@@ -47,7 +51,8 @@
         app:layout_constraintStart_toEndOf="@id/chat_image"
         app:layout_constraintEnd_toStartOf="@id/chat_image2"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"/>
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/chat_image2"
         android:layout_width="wrap_content"
@@ -58,5 +63,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/rectangle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

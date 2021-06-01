@@ -51,9 +51,9 @@ public class AllOrderFragment extends Fragment implements OnOrderListener {
             lodingDialog.dismiss();
             mOrderList = orderList;
             mAdapter.setOrderList(orderList);
-            if(mAdapter.getItemCount()<=0){
+            if (mAdapter.getItemCount() <= 0) {
                 emptyImage.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 emptyImage.setVisibility(View.GONE);
             }
         });

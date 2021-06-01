@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.android.customerapp.R;
@@ -48,11 +47,11 @@ public class LoginFragment extends Fragment {
             }
 
             loginViewModel.token.observe(getViewLifecycleOwner(), token -> {
-                if(token!="fail"){
+                if (token != "fail") {
                     saveToken(token);
                     Toast.makeText(getContext(), "登入成功", Toast.LENGTH_SHORT).show();
                     Navigation.findNavController(getView()).navigate(R.id.action_navigation_login_to_navigation_account);
-                }else{
+                } else {
                     Toast.makeText(getContext(), "登入失敗", Toast.LENGTH_SHORT).show();
                 }
             });

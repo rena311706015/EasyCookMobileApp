@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/navigation_recipe_video"
         android:name="com.example.android.customerapp.ui.recipe.RecipeVideoFragment"
-        tools:layout="@layout/fragment_recipe_video" >
+        tools:layout="@layout/fragment_recipe_video">
         <action
             android:id="@+id/action_navigation_recipe_video_to_navigation_video_activity"
             app:destination="@id/navigation_video_activity" />
@@ -38,7 +38,7 @@
     <activity
         android:id="@+id/navigation_video_activity"
         android:name="com.example.android.customerapp.VideoPlayerActivity"
-        tools:layout="@layout/activity_videoplayer"/>
+        tools:layout="@layout/activity_videoplayer" />
 
     <fragment
         android:id="@+id/navigation_account"

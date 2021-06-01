@@ -43,6 +43,7 @@ public class RegisterViewModel extends ViewModel {
             }
         });
     }
+
     private String toSHA(String pwd) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(pwd.getBytes());

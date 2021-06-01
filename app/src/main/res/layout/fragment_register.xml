@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.account.AccountFragment">
+
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH35"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/userId"
@@ -27,7 +27,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/guidelineH35"
         app:layout_constraintStart_toStartOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="@id/guidelineV8"/>
+        app:layout_constraintEnd_toEndOf="@id/guidelineV8" />
+
     <TextView
         android:id="@+id/accountText"
         android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH35"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/registerAccount"/>
+        app:layout_constraintEnd_toStartOf="@id/registerAccount" />
+
     <EditText
         android:id="@+id/registerAccount"
         android:layout_width="0dp"
@@ -49,7 +51,8 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH35"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH45"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/passwordText"
         android:layout_width="wrap_content"
@@ -61,7 +64,8 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH45"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH55"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/registerPassword"/>
+        app:layout_constraintEnd_toStartOf="@id/registerPassword" />
+
     <EditText
         android:id="@+id/registerPassword"
         android:layout_width="0dp"
@@ -72,7 +76,8 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH45"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH55"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/phoneText"
         android:layout_width="wrap_content"
@@ -84,7 +89,8 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH55"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH65"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/registerPhone"/>
+        app:layout_constraintEnd_toStartOf="@id/registerPhone" />
+
     <EditText
         android:id="@+id/registerPhone"
         android:layout_width="0dp"
@@ -94,7 +100,8 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH55"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH65"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/emailText"
         android:layout_width="wrap_content"
@@ -106,7 +113,8 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH65"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/registerEmail"/>
+        app:layout_constraintEnd_toStartOf="@id/registerEmail" />
+
     <EditText
         android:id="@+id/registerEmail"
         android:layout_width="0dp"
@@ -116,7 +124,8 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH65"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH75"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/nameText"
         android:layout_width="wrap_content"
@@ -128,7 +137,8 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH75"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH85"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/registerName"/>
+        app:layout_constraintEnd_toStartOf="@id/registerName" />
+
     <EditText
         android:id="@+id/registerName"
         android:layout_width="0dp"
@@ -138,7 +148,8 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH75"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH85"
         app:layout_constraintStart_toEndOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <Button
         android:id="@+id/register"
         android:layout_width="wrap_content"
@@ -149,72 +160,82 @@
         app:layout_constraintTop_toTopOf="@id/guidelineH9"
         app:layout_constraintBottom_toBottomOf="@id/guidelineH95"
         app:layout_constraintStart_toStartOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="@id/guidelineV8"/>
+        app:layout_constraintEnd_toEndOf="@id/guidelineV8" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2"/>
+        app:layout_constraintGuide_percent="0.2" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8"/>
+        app:layout_constraintGuide_percent="0.8" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25"/>
+        app:layout_constraintGuide_percent="0.25" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35"/>
+        app:layout_constraintGuide_percent="0.35" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH45"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45"/>
+        app:layout_constraintGuide_percent="0.45" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH55"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55"/>
+        app:layout_constraintGuide_percent="0.55" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH65"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65"/>
+        app:layout_constraintGuide_percent="0.65" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH75"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75"/>
+        app:layout_constraintGuide_percent="0.75" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH85"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85"/>
+        app:layout_constraintGuide_percent="0.85" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9"/>
+        app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH95"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95"/>
+        app:layout_constraintGuide_percent="0.95" />
 </androidx.constraintlayout.widget.ConstraintLayout>

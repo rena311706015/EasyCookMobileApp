@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout>
+
     <data>
-        <import type="com.example.android.customerapp.adapters.RecipeAdapter"/>
+
+        <import type="com.example.android.customerapp.adapters.RecipeAdapter" />
+
         <variable
             name="myAdapter"
             type="com.example.android.customerapp.adapters.RecipeAdapter" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragment_all_recipe"
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/fragment_all_recipe"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -23,13 +26,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineH1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.1"/>
+            app:layout_constraintGuide_percent="0.1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

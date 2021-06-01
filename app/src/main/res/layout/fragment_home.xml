@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,7 +17,7 @@
         app:layout_constraintBottom_toTopOf="@id/guidelineH35"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/icon_video"
@@ -30,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineH4"
         app:layout_constraintBottom_toTopOf="@id/guidelineH47"
         app:layout_constraintEnd_toStartOf="@id/icon_vegan"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:layout_width="0dp"
@@ -40,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineH47"
         app:layout_constraintBottom_toTopOf="@id/guidelineH5"
         app:layout_constraintEnd_toStartOf="@id/icon_vegan"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <ImageView
@@ -53,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineH4"
         app:layout_constraintBottom_toTopOf="@id/guidelineH47"
         app:layout_constraintEnd_toStartOf="@id/icon_fb"
-        app:layout_constraintStart_toEndOf="@id/icon_video"/>
+        app:layout_constraintStart_toEndOf="@id/icon_video" />
 
     <TextView
         android:layout_width="0dp"
@@ -63,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineH47"
         app:layout_constraintBottom_toTopOf="@id/guidelineH5"
         app:layout_constraintEnd_toStartOf="@id/icon_fb"
-        app:layout_constraintStart_toEndOf="@id/icon_video"/>
+        app:layout_constraintStart_toEndOf="@id/icon_video" />
 
     <ImageView
         android:id="@+id/icon_fb"
@@ -75,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineH4"
         app:layout_constraintBottom_toTopOf="@id/guidelineH47"
         app:layout_constraintEnd_toStartOf="@id/icon_ig"
-        app:layout_constraintStart_toEndOf="@id/icon_vegan"/>
+        app:layout_constraintStart_toEndOf="@id/icon_vegan" />
 
     <TextView
         android:layout_width="0dp"
@@ -85,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineH47"
         app:layout_constraintBottom_toTopOf="@id/guidelineH5"
         app:layout_constraintEnd_toStartOf="@id/icon_ig"
-        app:layout_constraintStart_toEndOf="@id/icon_vegan"/>
+        app:layout_constraintStart_toEndOf="@id/icon_vegan" />
 
     <ImageView
         android:id="@+id/icon_ig"
@@ -97,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineH4"
         app:layout_constraintBottom_toTopOf="@id/guidelineH47"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/icon_fb"/>
+        app:layout_constraintStart_toEndOf="@id/icon_fb" />
 
 
     <TextView
@@ -108,7 +107,7 @@
         app:layout_constraintTop_toBottomOf="@id/guidelineH47"
         app:layout_constraintBottom_toTopOf="@id/guidelineH5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/icon_fb"/>
+        app:layout_constraintStart_toEndOf="@id/icon_fb" />
 
 
     <ImageView
@@ -120,7 +119,7 @@
         app:layout_constraintBottom_toTopOf="@id/home_vip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guidelineH5"/>
+        app:layout_constraintTop_toBottomOf="@id/guidelineH5" />
 
     <ImageView
         android:id="@+id/home_vip"
@@ -131,30 +130,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_monthly_special"/>
+        app:layout_constraintTop_toBottomOf="@id/home_monthly_special" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35"/>
+        app:layout_constraintGuide_percent="0.35" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4"/>
+        app:layout_constraintGuide_percent="0.4" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH47"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.47"/>
+        app:layout_constraintGuide_percent="0.47" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"/>
+        app:layout_constraintGuide_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

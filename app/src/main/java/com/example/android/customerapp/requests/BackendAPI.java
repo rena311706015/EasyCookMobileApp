@@ -6,7 +6,6 @@ import com.example.android.customerapp.models.Recipe;
 import com.example.android.customerapp.models.RecipeImage;
 import com.google.gson.JsonObject;
 
-import java.sql.Blob;
 import java.util.List;
 
 import okhttp3.ResponseBody;

@@ -29,7 +29,7 @@ public class OrderItem implements Serializable {
     }
 
     public String getItemPrice() {
-        return "NT$ "+itemPrice;
+        return "NT$ " + itemPrice;
     }
 
     public void setItemPrice(int itemPrice) {

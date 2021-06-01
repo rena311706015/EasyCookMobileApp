@@ -1,14 +1,15 @@
 package com.example.android.customerapp;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Build;
@@ -20,6 +21,7 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -28,8 +30,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.android.customerapp.models.ExtendedTimeBar;
 import com.example.android.customerapp.models.LodingDialog;
@@ -38,10 +42,10 @@ import com.example.android.customerapp.models.RecipeStep;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.ui.DefaultTimeBar;
 import com.google.android.exoplayer2.ui.PlayerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -90,10 +94,10 @@ public class VideoPlayerActivity extends AppCompatActivity {
         mRecipe = (Recipe) recipeIntent.getSerializableExtra("recipe");
 
         stepList = new ArrayList<>();
-        for (RecipeStep steps : mRecipe.getRecipeSteps()) {
-            stepList.add(steps);
-        }
-
+        RecipeStep[] stepArray = mRecipe.getRecipeSteps();
+        List list = Arrays.asList(stepArray);
+        stepList = new ArrayList(list);
+        getPermission();
         setTextToSpeech();
         setAnime();
 
@@ -225,33 +229,39 @@ public class VideoPlayerActivity extends AppCompatActivity {
         hintText.setVisibility(View.VISIBLE);
     }
 
-    public void sendNotification() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("cook", name, importance);
-            channel.setDescription("description");
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+//    public void sendNotification() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            CharSequence name = getString(R.string.channel_name);
+//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+//            NotificationChannel channel = new NotificationChannel("cook", name, importance);
+//            channel.setDescription("description");
+//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+//            notificationManager.createNotificationChannel(channel);
+//        }
+//        Intent intent = new Intent(this, VideoPlayerActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_NO_CREATE);
+//
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "cook")
+//                .setSmallIcon(R.drawable.icon)
+//                .setContentTitle("時間到")
+//                .setContentText("請回到影片導覽以繼續教學")
+//                .setPriority(NotificationCompat.PRIORITY_MAX)
+//                .setContentIntent(pendingIntent)
+//                .setAutoCancel(true);
+//
+//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+//
+//        notificationManager.notify(1, builder.build());
+//    }
+
+    public void getPermission() {
+        int permissionCheck = ContextCompat.checkSelfPermission(VideoPlayerActivity.this, Manifest.permission.RECORD_AUDIO);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(VideoPlayerActivity.this,
+                    new String[]{Manifest.permission.RECORD_AUDIO},
+                    1);
         }
-        Intent intent = new Intent(this, VideoPlayerActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_NO_CREATE);
-
-//                intent.setAction(Intent.ACTION_MAIN);
-//                intent.addCategory(Intent.CATEGORY_LAUNCHER);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "cook")
-                .setSmallIcon(R.drawable.icon)
-                .setContentTitle("時間到")
-                .setContentText("請回到影片導覽以繼續教學")
-                .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-
-        notificationManager.notify(1, builder.build());
     }
 
     private class MyRecognizerListener implements RecognitionListener {
@@ -280,7 +290,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
                         Log.e("VIDEO", "onFinish");
                         ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 500);
                         toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 5000);
-                        sendNotification();
+//                        sendNotification();
                         stepText.setText("時間到");
                         hintText.setText("請說「下一步」以繼續導覽");
                         recognizer.startListening(intent);
@@ -289,12 +299,12 @@ public class VideoPlayerActivity extends AppCompatActivity {
                 timer.start();
 
             } else if (sb.toString().contains("上一步")) {
-                index -= 1;
                 recognizer.cancel();
                 setGone();
                 if (index - 1 < 0) {
                     player.seekTo(0);
                 } else {
+                    index -= 1;
                     player.seekTo(stepList.get(index - 1).getStartTime());
                 }
                 currentTime = stepList.get(index).getStartTime();
@@ -307,8 +317,13 @@ public class VideoPlayerActivity extends AppCompatActivity {
             } else if (sb.toString().contains("重播")) {
                 recognizer.cancel();
                 setGone();
-                player.seekTo(stepList.get(index - 1).getStartTime());
-                handler.postDelayed(() -> player.play(), 500);
+                if (index - 1 < 0) {
+                    player.seekTo(0);
+                    handler.postDelayed(() -> player.play(), 500);
+                } else {
+                    player.seekTo(stepList.get(index - 1).getStartTime());
+                    handler.postDelayed(() -> player.play(), 500);
+                }
             } else {
                 recognizer.startListening(intent);
             }
@@ -355,8 +370,10 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
         @Override
         public void onEndOfSpeech() {
+
+            recognizer.stopListening();
             recognizer.cancel();
-            recognizer.startListening(intent);
+//            recognizer.startListening(intent);
         }
 
         @Override
@@ -367,6 +384,25 @@ public class VideoPlayerActivity extends AppCompatActivity {
         public void onEvent(int eventType, Bundle params) {
         }
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.e("EVENT","onKeyDown");
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            AlertDialog a = new AlertDialog.Builder(this).setTitle("確定要退出嗎?")
+                    .setPositiveButton("確定", (dialog1, num1) -> {
+                        Intent intent = new Intent();
+                        intent.setClass(this, MainActivity.class);
+                        startActivity(intent);
+                    })
+                    .setNegativeButton("取消", (dialog1, num1) -> {
+                        dialog1.cancel();
+                    }).create();
+            a.show();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
 

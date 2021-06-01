@@ -87,7 +87,8 @@ public class AccountFragment extends Fragment {
         editor.clear();
         editor.apply();
     }
-    private void setIconVisibility(){
+
+    private void setIconVisibility() {
         if (readToken() == null) {
 
             btnLogin.setVisibility(View.VISIBLE);

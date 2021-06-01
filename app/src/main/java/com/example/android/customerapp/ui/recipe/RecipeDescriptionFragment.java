@@ -53,7 +53,7 @@ public class RecipeDescriptionFragment extends Fragment {
         mIngredientRecyclerView.setAdapter(mIngredientAdapter);
         mIngredientRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.setRecipe(mRecipe);
-        switch(binding.getRecipe().getVersion()){
+        switch (binding.getRecipe().getVersion()) {
             case "正常版本":
                 binding.recipeVersion.setTextColor(Color.parseColor("#99876F"));
                 break;

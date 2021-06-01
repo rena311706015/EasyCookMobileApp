@@ -2,8 +2,6 @@ package com.example.android.customerapp.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -44,7 +42,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeViewHolder> {
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         LayoutRecipeListItemBinding binding = DataBindingUtil.getBinding(holder.itemView);
         binding.setRecipe(recipeList.get(position));
-        switch(binding.getRecipe().getVersion()){
+        switch (binding.getRecipe().getVersion()) {
             case "正常版本":
                 binding.gridRecipeVersion.setTextColor(Color.parseColor("#99876F"));
                 break;

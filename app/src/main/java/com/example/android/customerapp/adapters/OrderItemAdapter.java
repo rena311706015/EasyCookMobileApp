@@ -2,7 +2,6 @@ package com.example.android.customerapp.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.customerapp.R;
-import com.example.android.customerapp.models.Ingredient;
 import com.example.android.customerapp.models.OrderItem;
-import com.example.android.customerapp.models.Recipe;
-import com.example.android.customerapp.models.RecipeIngredient;
-
-import java.util.List;
 
 public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemViewHolder> {
     private Context context;
@@ -33,7 +27,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemViewHolder> 
     @Override
     public OrderItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_order_item_list_item, parent, false);
-        return new OrderItemViewHolder(view,onRecipeListener);
+        return new OrderItemViewHolder(view, onRecipeListener);
 
 
     }
@@ -44,7 +38,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemViewHolder> 
         holder.name.setText(orderItem.getRecipe().getName());
         holder.price.setText(orderItem.getItemPrice());
         holder.version.setText(orderItem.getRecipe().getVersion());
-        switch(orderItem.getRecipe().getVersion()){
+        switch (orderItem.getRecipe().getVersion()) {
             case "正常版本":
                 holder.version.setTextColor(Color.parseColor("#99876F"));
                 break;
@@ -58,12 +52,12 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemViewHolder> 
                 holder.version.setTextColor(Color.parseColor("#F09797"));
                 break;
         }
-        if(orderItem.getBitmap()!=null){
+        if (orderItem.getBitmap() != null) {
             holder.photo.setImageBitmap(orderItem.getBitmap());
         }
-        if(orderItem.isCustomize()==true){
+        if (orderItem.isCustomize() == true) {
             holder.isCustomize.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             holder.isCustomize.setVisibility(View.GONE);
         }
 
@@ -73,6 +67,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemViewHolder> 
         this.orderItems = orderItems;
         notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
 

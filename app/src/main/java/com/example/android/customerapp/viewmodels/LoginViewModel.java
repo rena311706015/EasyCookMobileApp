@@ -9,15 +9,8 @@ import com.example.android.customerapp.models.Member;
 import com.example.android.customerapp.requests.BackendAPIClient;
 import com.google.gson.JsonObject;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,6 +43,7 @@ public class LoginViewModel extends ViewModel {
             }
         });
     }
+
     private String toSHA(String pwd) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(pwd.getBytes());

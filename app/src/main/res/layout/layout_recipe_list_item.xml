@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
-        <import type="com.example.android.customerapp.models.Recipe"/>
+
+        <import type="com.example.android.customerapp.models.Recipe" />
+
         <variable
             name="recipe"
-            type="Recipe"/>
+            type="Recipe" />
     </data>
 
-    <androidx.cardview.widget.CardView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:card_view="http://schemas.android.com/tools"
+    <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="10dp"
         app:cardCornerRadius="30dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/grid_recipe_image"
                 android:layout_width="0dp"
@@ -28,7 +31,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/guidelineH8"/>
+                app:layout_constraintBottom_toTopOf="@id/guidelineH8" />
+
             <TextView
                 android:id="@+id/grid_recipe_name"
                 android:layout_width="0dp"
@@ -41,17 +45,17 @@
                 app:layout_constraintTop_toTopOf="@id/guidelineH8"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/guidelineV7"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-<!--            <ImageView-->
-<!--                android:id="@+id/grid_recipe_likesCount_image"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="0dp"-->
-<!--                android:scaleType="fitCenter"-->
-<!--                android:src="@drawable/like"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/guidelineH8"-->
-<!--                app:layout_constraintStart_toEndOf="@id/guidelineV75"-->
-<!--                app:layout_constraintEnd_toEndOf="@id/guidelineV85"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+                app:layout_constraintBottom_toBottomOf="parent" />
+            <!--            <ImageView-->
+            <!--                android:id="@+id/grid_recipe_likesCount_image"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                android:scaleType="fitCenter"-->
+            <!--                android:src="@drawable/like"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/guidelineH8"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/guidelineV75"-->
+            <!--                app:layout_constraintEnd_toEndOf="@id/guidelineV85"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
             <TextView
                 android:id="@+id/grid_recipe_likesCount"
                 android:layout_width="0dp"
@@ -64,7 +68,8 @@
                 app:layout_constraintTop_toTopOf="@id/guidelineH8"
                 app:layout_constraintStart_toEndOf="@id/grid_recipe_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent" />
+
             <TextView
                 android:id="@+id/grid_recipe_version"
                 android:layout_width="wrap_content"
@@ -77,49 +82,56 @@
                 android:background="@drawable/tag_normal"
                 app:layout_constraintTop_toTopOf="@id/guidelineH1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/guidelineH25"/>
+                app:layout_constraintBottom_toBottomOf="@id/guidelineH25" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineV7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.7"/>
+                app:layout_constraintGuide_percent="0.7" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineV75"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.75"/>
+                app:layout_constraintGuide_percent="0.75" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineV8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.8"/>
+                app:layout_constraintGuide_percent="0.8" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineV85"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.85"/>
+                app:layout_constraintGuide_percent="0.85" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineH1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.1"/>
+                app:layout_constraintGuide_percent="0.1" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineH25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.25"/>
+                app:layout_constraintGuide_percent="0.25" />
+
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineH8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.8"/>
+                app:layout_constraintGuide_percent="0.8" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

@@ -2,15 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <import type="com.example.android.customerapp.models.Order"/>
+
+        <import type="com.example.android.customerapp.models.Order" />
+
         <variable
             name="order"
-            type="Order"/>
+            type="Order" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/grid_order_id"
             android:layout_width="wrap_content"
@@ -24,7 +29,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guidelineV4"
-            app:layout_constraintBottom_toTopOf="@id/grid_order_date"/>
+            app:layout_constraintBottom_toTopOf="@id/grid_order_date" />
+
         <TextView
             android:id="@+id/grid_order_date"
             android:layout_width="wrap_content"
@@ -38,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@id/grid_order_id"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guidelineV4"
-            app:layout_constraintBottom_toTopOf="@id/line"/>
+            app:layout_constraintBottom_toTopOf="@id/line" />
 
         <TextView
             android:id="@+id/grid_order_status"
@@ -54,7 +60,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/guidelineV4"
             app:layout_constraintEnd_toStartOf="@id/guidelineV7"
-            app:layout_constraintBottom_toTopOf="@id/line"/>
+            app:layout_constraintBottom_toTopOf="@id/line" />
+
         <TextView
 
             android:id="@+id/grid_order_amount"
@@ -69,7 +76,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="@id/guidelineV7"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/line"/>
+            app:layout_constraintBottom_toTopOf="@id/line" />
 
         <View
             android:id="@+id/line"
@@ -80,18 +87,20 @@
             app:layout_constraintTop_toBottomOf="@id/grid_order_amount"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineV4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4"/>
+            app:layout_constraintGuide_percent="0.4" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineV7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.7"/>
+            app:layout_constraintGuide_percent="0.7" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

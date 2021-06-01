@@ -1,6 +1,8 @@
 package com.example.android.customerapp.ui.recipe;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import com.example.android.customerapp.databinding.FragmentRecipeBinding;
 import com.example.android.customerapp.models.LodingDialog;
 import com.example.android.customerapp.models.Recipe;
 import com.example.android.customerapp.viewmodels.RecipeViewModel;
+import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.material.tabs.TabLayout;
 
 public class RecipeFragment extends Fragment {
@@ -58,4 +62,5 @@ public class RecipeFragment extends Fragment {
 
         return root;
     }
+
 }
